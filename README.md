@@ -7,7 +7,7 @@
 |--------|-------|--------|-----|
 | WITNESS-1 | Quantum-Sourced Nonces with Verifiable Provenance | Published | [10.5281/zenodo.21424324](https://doi.org/10.5281/zenodo.21424324) |
 | WITNESS-2 | Length-Prefixed Quantum Nonce with Record-Hash Field Integrity | Published | [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381) |
-| WITNESS-3 | Cosmic Beacon — CHSH Bell + NIST + LIGO/GWOSC Fused Nonce | ✅ Executed (Zenodo pending) | TBD |
+| WITNESS-3 | Cosmic Beacon — CHSH Bell + NIST + LIGO/GWOSC Fused Nonce | Published | [10.5281/zenodo.21434832](https://doi.org/10.5281/zenodo.21434832) |
 
 **WITNESS series concept DOI:** [10.5281/zenodo.21424323](https://doi.org/10.5281/zenodo.21424323)
 
@@ -210,7 +210,7 @@ gate-stop protocol; results published as-is regardless of outcome.
 # WITNESS-3: Cosmic Beacon — CHSH Bell + NIST + LIGO/GWOSC Fused Authorization Nonce
 
 **Series:** WITNESS (third record)  
-**Status:** ✅ Executed (Zenodo DOI pending publication)
+**Status:** Published
 
 ---
 
@@ -341,8 +341,9 @@ This experiment demonstrates that an authorization nonce can carry **publicly au
 ---
 
 **Preregistration commit:** `ac18f61` (2026-07-18)  
+**Execution commit:** `6fccdb6` (2026-07-18)  
 **Full report:** [witness-3/results/WITNESS-3-report.md](witness-3/results/WITNESS-3-report.md)  
-**Zenodo DOI:** *(pending publication)*
+**Zenodo DOI:** [10.5281/zenodo.21434832](https://doi.org/10.5281/zenodo.21434832)
 
 ---
 

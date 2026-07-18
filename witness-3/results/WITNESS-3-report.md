@@ -274,6 +274,8 @@ This experiment demonstrates that an authorization nonce can carry **publicly au
 ---
 
 **Preregistration commit:** `ac18f61` (2026-07-18, `witness-testbeds` repo)  
+**Execution commit:** `6fccdb6` (2026-07-18, `witness-testbeds` repo)  
+**Zenodo DOI:** [10.5281/zenodo.21434832](https://doi.org/10.5281/zenodo.21434832)  
 **Report generated:** 2026-07-18 22:40:20 UTC
 
 ---
