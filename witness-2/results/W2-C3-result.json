@@ -1,0 +1,28 @@
+{
+  "case": "W2-C3",
+  "description": "Cross-context replay \u2014 record_hash integrity and ARK-457 boundary",
+  "verdict": "PASS",
+  "sub_cases": [
+    {
+      "sub_case": "a",
+      "description": "context_id changed, record_hash not recomputed",
+      "record_hash_valid": false,
+      "enforcement_layer": "record_hash",
+      "replay_decision": "DENY",
+      "sub_verdict": "PASS"
+    },
+    {
+      "sub_case": "b",
+      "description": "context_id changed, record_hash recomputed \u2014 boundary test",
+      "record_hash_valid": true,
+      "enforcement_layer": "ark457_context_binding",
+      "original_decision": "ALLOW",
+      "replay_decision": "DENY",
+      "mismatched_dimensions": [
+        "session"
+      ],
+      "design_boundary_note": "record_hash valid because attacker recomputed it. DENY enforced by ARK-457 5-dim context binding. Confirms: record_hash = field integrity only; context_id enforcement requires separate authorization layer.",
+      "sub_verdict": "PASS"
+    }
+  ]
+}

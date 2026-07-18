@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WITNESS-2 Results Report — Remnant Fieldworks Inc.</title>
+<style>
+  body { font-family: Georgia, serif; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; line-height: 1.7; }
+  h1 { color: #1a2b4a; border-bottom: 3px solid #1a2b4a; padding-bottom: 12px; }
+  h2 { color: #1a2b4a; border-bottom: 1px solid #ccc; padding-bottom: 6px; margin-top: 40px; }
+  h3 { color: #2a4a7a; margin-top: 28px; }
+  table { border-collapse: collapse; width: 100%; margin: 18px 0; }
+  th { background: #1a2b4a; color: white; padding: 8px 12px; text-align: left; }
+  td { padding: 7px 12px; border: 1px solid #ddd; }
+  tr:nth-child(even) { background: #f7f9fc; }
+  code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; font-size: 0.88em; }
+  pre { background: #1a2b4a; color: #e8eefc; padding: 18px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; }
+  blockquote { border-left: 4px solid #1a2b4a; margin-left: 0; padding-left: 18px; color: #555; }
+  .verdict-pass { color: #1a7a1a; font-weight: bold; }
+  footer { margin-top: 60px; border-top: 1px solid #ccc; padding-top: 16px; color: #888; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<h1>WITNESS-2 Results Report</h1>
+<p><strong>Series:</strong> WITNESS (Quantum-Nonce Authorization Provenance Study)<br />
+<strong>Experiment ID:</strong> WITNESS-2<br />
+<strong>Institution:</strong> Remnant Fieldworks Inc.<br />
+<strong>PI:</strong> Derek Adam Hone<br />
+<strong>Date of QPU Execution:</strong> 2026-07-18<br />
+<strong>Preregistration DOI:</strong> (Zenodo deposit pending — see WITNESS-2 deposit)<br />
+<strong>WITNESS Series Concept DOI:</strong> 10.5281/zenodo.21424323<br />
+<strong>WITNESS-1 Reference DOI:</strong> 10.5281/zenodo.21424324  </p>
+<hr />
+<h2>1. Executive Summary</h2>
+<p>WITNESS-2 demonstrates that a quantum-sourced nonce bound to a specific execution context via the ARK-457 five-dimensional authorization boundary can withstand: (a) honest end-to-end verification against the IBM provider record, (b) substitution / tamper detection across four distinct forgery patterns, and (c) cross-context replay rejection through both record-hash integrity and ARK-457 context binding.</p>
+<p>All three preregistered cases <strong>PASS</strong>. The experiment ran on <strong>ibm_fez</strong> (IBM Quantum, open plan) using 4000 shots across 8 qubits, producing 256 unique measurement outcomes — covering the full 2⁸ = 256 computational basis states — consistent with a uniform superposition.</p>
+<p>Two pre-execution harness fixes (FIX-1, FIX-2) were applied and disclosed before QPU submission, consistent with the ARK-451 / WITNESS-1 harness-fix precedent. Neither fix touched circuit logic, shot count, case definitions, criteria, or the decision procedure.</p>
+<hr />
+<h2>2. Preregistration</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preregistration document</td>
+<td><code>witness-2/prereg/WITNESS-2-prereg.md</code></td>
+</tr>
+<tr>
+<td>MANIFEST lock</td>
+<td><code>witness-2/MANIFEST.sha256</code></td>
+</tr>
+<tr>
+<td>Preregistration format</td>
+<td>Markdown + PDF + DOCX</td>
+</tr>
+<tr>
+<td>Schema version</td>
+<td><code>witness-proofrecord-1.0</code></td>
+</tr>
+<tr>
+<td>Context ID</td>
+<td><code>witness-2-primary</code></td>
+</tr>
+<tr>
+<td>Nonce construction</td>
+<td>Length-prefixed (LP) SHA-256, v2</td>
+</tr>
+<tr>
+<td>CP1 PR</td>
+<td>#3 (merged SHA c2d9b3b before QPU submission)</td>
+</tr>
+<tr>
+<td>FIX-1 commit</td>
+<td>8ae73bf (service.least_busy → min(pending_jobs))</td>
+</tr>
+<tr>
+<td>FIX-2 commit</td>
+<td>2b6cbc5 (ISA transpilation via qiskit.transpile)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Harness Fixes (Disclosed, Pre-Execution)</h2>
+<p><strong>FIX-1 (commit 8ae73bf):</strong><br />
+<code>service.least_busy(backend_list)</code> raises <code>TypeError</code> in qiskit-ibm-runtime 0.48.0 when the internal <code>qubits</code> field is a list not an int. Fixed by replacing with <code>min(eligible, key=lambda b: b.status().pending_jobs)</code>. Fix does NOT touch circuit, shots, cases, criteria, or decision procedure. MANIFEST.sha256 recomputed and recommitted.</p>
+<p><strong>FIX-2 (commit 2b6cbc5):</strong><br />
+IBM Quantum API rejects non-ISA circuits as of March 2024. The H gate is not native to ibm_fez's gate set. Added <code>transpile(qc, backend=backend, optimization_level=1)</code> before submission. Logical circuit (uniform 8-qubit H + measure_all) is unchanged — only gate representation (H → RZ/SX) differs. MANIFEST.sha256 recomputed and recommitted.</p>
+<p>Both fixes consistent with ARK-451 / WITNESS-1 harness-fix precedent.</p>
+<hr />
+<h2>4. QPU Execution</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Job ID</td>
+<td><code>d9di7nkinv1c73ap4ed0</code></td>
+</tr>
+<tr>
+<td>Backend</td>
+<td><code>ibm_fez</code></td>
+</tr>
+<tr>
+<td>Provider instance</td>
+<td><code>crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::</code></td>
+</tr>
+<tr>
+<td>Channel</td>
+<td><code>ibm_quantum_platform</code></td>
+</tr>
+<tr>
+<td>Execution mode</td>
+<td><code>Batch</code></td>
+</tr>
+<tr>
+<td>Qubits</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>4000</td>
+</tr>
+<tr>
+<td>Unique outcomes</td>
+<td>256 (= 2⁸; full basis coverage)</td>
+</tr>
+<tr>
+<td>Selection time (UTC)</td>
+<td>2026-07-18T06:57:29Z</td>
+</tr>
+<tr>
+<td>Submission time (UTC)</td>
+<td>2026-07-18T06:57:33Z</td>
+</tr>
+<tr>
+<td>ISA circuit depth</td>
+<td>4</td>
+</tr>
+<tr>
+<td>ISA circuit ops</td>
+<td>RZ×16, SX×8, Measure×8, Barrier×1</td>
+</tr>
+</tbody>
+</table>
+<h3>Backend Calibration (at execution)</h3>
+<table>
+<thead>
+<tr>
+<th>Qubit</th>
+<th>Readout Error</th>
+<th>T1 (μs)</th>
+<th>T2 (μs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1.221%</td>
+<td>39.1</td>
+<td>20.2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1.501%</td>
+<td>101.7</td>
+<td>110.7</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.342%</td>
+<td>180.0</td>
+<td>155.9</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.819%</td>
+<td>181.1</td>
+<td>196.5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.562%</td>
+<td>113.1</td>
+<td>87.7</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1.233%</td>
+<td>132.1</td>
+<td>111.7</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.525%</td>
+<td>206.9</td>
+<td>144.9</td>
+</tr>
+<tr>
+<td>7</td>
+<td>1.392%</td>
+<td>118.8</td>
+<td>40.1</td>
+</tr>
+</tbody>
+</table>
+<p>Backend version: 1.3.37. Calibration captured before submission.</p>
+<hr />
+<h2>5. ProofRecord</h2>
+<pre><code class="language-json">{
+  &quot;schema_version&quot;: &quot;witness-proofrecord-1.0&quot;,
+  &quot;quantum_nonce&quot;: &quot;e425dc92c028b344f3f8f46b9c269bf9f8696f87e6b0085d46fad7452770659b&quot;,
+  &quot;job_id&quot;: &quot;d9di7nkinv1c73ap4ed0&quot;,
+  &quot;backend&quot;: &quot;ibm_fez&quot;,
+  &quot;provider_instance&quot;: &quot;crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::&quot;,
+  &quot;calibration_hash&quot;: &quot;1ab5ef208c90ab60ed039c738374c5f51bcc49e2557a3151c23873a4ee1c4f3f&quot;,
+  &quot;raw_counts_hash&quot;: &quot;97bfe36ea8815599d8b11bdbb9ed9cfc0f0946dbf43961e12fe1c42fe1adbcef&quot;,
+  &quot;context_id&quot;: &quot;witness-2-primary&quot;,
+  &quot;timestamp_utc&quot;: &quot;2026-07-18T06:57:33Z&quot;,
+  &quot;record_hash&quot;: &quot;271ff5eae1fdfac85f6fd24ebd919a608804d6f1546a4ca9874f481ce5f97ae1&quot;
+}
+</code></pre>
+<hr />
+<h2>6. Case Results</h2>
+<h3>W2-C1 — Honest End-to-End Verification</h3>
+<p><strong>Verdict: PASS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>record_hash_match</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>quantum_nonce_match</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>raw_counts_hash_match</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>cal_hash_match</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>schema_version_match</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>context_id_present</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>provider_instance_present</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>provider_job_found</td>
+<td>✅ true</td>
+</tr>
+<tr>
+<td>provider_counts_match</td>
+<td>✅ true</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Provenance note:</strong> Confirms stored job_id and counts match IBM provider API record at verification time. Does not confirm physical origin or quality of QPU randomness.</p>
+<hr />
+<h3>W2-C2 — Substitution / Tamper Detection (4 sub-trials)</h3>
+<p><strong>Verdict: PASS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Sub-trial</th>
+<th>Substitution</th>
+<th>Detection Layer</th>
+<th>Sub-verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>raw_counts_altered</td>
+<td>quantum_nonce</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>b</td>
+<td>job_id_altered</td>
+<td>quantum_nonce and record_hash</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>c</td>
+<td>calibration_snapshot_altered</td>
+<td>quantum_nonce</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>d</td>
+<td>context_id_altered (record_hash not updated)</td>
+<td>record_hash</td>
+<td>✅ PASS</td>
+</tr>
+</tbody>
+</table>
+<p>All four forgery patterns detected. No false negative.</p>
+<hr />
+<h3>W2-C3 — Cross-Context Replay Rejection (2 sub-cases)</h3>
+<p><strong>Verdict: PASS</strong></p>
+<table>
+<thead>
+<tr>
+<th>Sub-case</th>
+<th>Description</th>
+<th>Enforcement Layer</th>
+<th>Replay Decision</th>
+<th>Sub-verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>context_id changed, record_hash not recomputed</td>
+<td>record_hash</td>
+<td>DENY</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>b</td>
+<td>context_id changed, record_hash recomputed — boundary test</td>
+<td>ARK-457 context binding</td>
+<td>DENY</td>
+<td>✅ PASS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design boundary note (sub-case b):</strong> record_hash is valid because the attacker recomputed it. DENY is enforced by ARK-457 five-dimensional context binding. This confirms the design boundary: record_hash = field integrity only; context_id enforcement requires the separate authorization layer (ARK-457).</p>
+<hr />
+<h2>7. Integrity Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Hash</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>quantum_nonce</td>
+<td><code>e425dc92c028b344f3f8f46b9c269bf9f8696f87e6b0085d46fad7452770659b</code></td>
+</tr>
+<tr>
+<td>raw_counts_hash</td>
+<td><code>97bfe36ea8815599d8b11bdbb9ed9cfc0f0946dbf43961e12fe1c42fe1adbcef</code></td>
+</tr>
+<tr>
+<td>calibration_hash</td>
+<td><code>1ab5ef208c90ab60ed039c738374c5f51bcc49e2557a3151c23873a4ee1c4f3f</code></td>
+</tr>
+<tr>
+<td>record_hash</td>
+<td><code>271ff5eae1fdfac85f6fd24ebd919a608804d6f1546a4ca9874f481ce5f97ae1</code></td>
+</tr>
+</tbody>
+</table>
+<p>All hashes computed deterministically from QPU output. No post-hoc modification.</p>
+<hr />
+<h2>8. Artifacts</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ProofRecord</td>
+<td><code>witness-2/results/proofrecord.json</code></td>
+</tr>
+<tr>
+<td>Raw counts</td>
+<td><code>witness-2/results/raw/raw_counts.json</code></td>
+</tr>
+<tr>
+<td>Job metadata</td>
+<td><code>witness-2/results/raw/job_meta.json</code></td>
+</tr>
+<tr>
+<td>Calibration snapshot</td>
+<td><code>witness-2/results/raw/calibration_snapshot.json</code></td>
+</tr>
+<tr>
+<td>W2-C1 result</td>
+<td><code>witness-2/results/W2-C1-result.json</code></td>
+</tr>
+<tr>
+<td>W2-C2 result</td>
+<td><code>witness-2/results/W2-C2-result.json</code></td>
+</tr>
+<tr>
+<td>W2-C3 result</td>
+<td><code>witness-2/results/W2-C3-result.json</code></td>
+</tr>
+<tr>
+<td>Preregistration (MD)</td>
+<td><code>witness-2/prereg/WITNESS-2-prereg.md</code></td>
+</tr>
+<tr>
+<td>Preregistration (PDF)</td>
+<td><code>witness-2/prereg/WITNESS-2-prereg.pdf</code></td>
+</tr>
+<tr>
+<td>Preregistration (DOCX)</td>
+<td><code>witness-2/prereg/WITNESS-2-prereg.docx</code></td>
+</tr>
+<tr>
+<td>MANIFEST</td>
+<td><code>witness-2/MANIFEST.sha256</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>9. Scope and Limitations</h2>
+<ol>
+<li>
+<p><strong>Provider provenance only.</strong> W2-C1 confirms that the job_id and counts match the IBM provider API at verification time. This confirms provider record integrity, not physical QPU origin or randomness quality.</p>
+</li>
+<li>
+<p><strong>Harness fixes disclosed.</strong> Two pre-execution harness fixes (FIX-1, FIX-2) were applied and committed before any QPU job was submitted. They did not change the circuit, shot count, eligibility criteria, case definitions, or decision procedure. MANIFEST.sha256 was recomputed and recommitted after each fix.</p>
+</li>
+<li>
+<p><strong>Open plan budget.</strong> Job was submitted on the IBM Quantum open plan. Budget status confirmed (125s remaining) before submission.</p>
+</li>
+<li>
+<p><strong>ARK-457 boundary confirmed.</strong> Sub-case W2-C3b demonstrates that record_hash recomputation by an attacker is insufficient for cross-context replay; only ARK-457 context binding blocks it.</p>
+</li>
+</ol>
+<hr />
+<h2>10. WITNESS Series Context</h2>
+<table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>Status</th>
+<th>DOI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WITNESS-1</td>
+<td>✅ Published</td>
+<td><a href="https://doi.org/10.5281/zenodo.21424324">10.5281/zenodo.21424324</a></td>
+</tr>
+<tr>
+<td>WITNESS-2</td>
+<td>✅ Complete — Zenodo pending</td>
+<td>(this deposit)</td>
+</tr>
+</tbody>
+</table>
+<p>WITNESS series concept DOI: <a href="https://doi.org/10.5281/zenodo.21424323">10.5281/zenodo.21424323</a></p>
+<hr />
+<p><em>Report generated: 2026-07-18. All verdicts reflect actual QPU execution output. No synthetic data.</em><br />
+<em>Remnant Fieldworks Inc. — To God be the glory.</em></p>
+<footer>
+  <p>Remnant Fieldworks Inc. &bull; WITNESS-2 Results Report &bull; 2026-07-18 &bull;
+  WITNESS series: <a href="https://doi.org/10.5281/zenodo.21424323">10.5281/zenodo.21424323</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "job_id": "d9di7nkinv1c73ap4ed0",
+  "backend": "ibm_fez",
+  "provider_instance": "crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::",
+  "shots": 4000,
+  "n_qubits": 8,
+  "selection_time_utc": "2026-07-18T06:57:29.394749+00:00",
+  "submission_time_utc": "2026-07-18T06:57:33Z",
+  "unique_outcomes": 256,
+  "total_shots": 4000,
+  "channel": "ibm_quantum_platform",
+  "execution_mode": "Batch",
+  "harness_fix_disclosure": "FIX-1 (pre-execution, disclosed): service.least_busy(backend_list) raises TypeError in qiskit-ibm-runtime 0.48.0 (internal qubits field is list not int). Fixed: replaced with min(eligible, key=lambda b: b.status().pending_jobs). Fix does NOT touch circuit, shots, cases, criteria, or decision procedure. | FIX-2 (pre-execution, disclosed): IBM Quantum API requires ISA-compliant circuits as of March 2024 (H gate rejected on ibm_fez native set). Added transpile(qc, backend=backend, optimization_level=1) before submission. Logical circuit (uniform 8-qubit H + measure_all) is unchanged; only gate representation differs. MANIFEST.sha256 recomputed and recommitted after each fix. Consistent with ARK-451 / WITNESS-1 harness-fix precedent.",
+  "qiskit_version": "2.5.0",
+  "qiskit_ibm_runtime_version": "0.48.0",
+  "python_version": "3.11.6"
+}

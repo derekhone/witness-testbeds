@@ -1,0 +1,12 @@
+{
+  "schema_version": "witness-proofrecord-1.0",
+  "quantum_nonce": "e425dc92c028b344f3f8f46b9c269bf9f8696f87e6b0085d46fad7452770659b",
+  "job_id": "d9di7nkinv1c73ap4ed0",
+  "backend": "ibm_fez",
+  "provider_instance": "crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::",
+  "calibration_hash": "1ab5ef208c90ab60ed039c738374c5f51bcc49e2557a3151c23873a4ee1c4f3f",
+  "raw_counts_hash": "97bfe36ea8815599d8b11bdbb9ed9cfc0f0946dbf43961e12fe1c42fe1adbcef",
+  "context_id": "witness-2-primary",
+  "timestamp_utc": "2026-07-18T06:57:33Z",
+  "record_hash": "271ff5eae1fdfac85f6fd24ebd919a608804d6f1546a4ca9874f481ce5f97ae1"
+}
