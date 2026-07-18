@@ -87,7 +87,11 @@ def main():
         print("GATE-STOP: no eligible backend found")
         sys.exit(2)
 
-    backend = service.least_busy(eligible)
+    # NOTE: service.least_busy(backend_list) raises TypeError in qiskit-ibm-runtime 0.48.0
+    # when the internal qubits field is a list not an int. Harness fix (disclosed):
+    # select by minimum pending_jobs from the already-filtered eligible list instead.
+    # Fix does NOT touch circuit, shots, cases, criteria, or decision procedure.
+    backend = min(eligible, key=lambda b: b.status().pending_jobs)
     print(f"Selected: {backend.name} at {selection_time}")
 
     # Circuit
@@ -149,7 +153,14 @@ def main():
             "total_shots": sum(raw_counts.values()),
             "channel": "ibm_quantum_platform",
             "execution_mode": "Batch",
-            "harness_fix_disclosure": "None — no pre-execution fixes required for WITNESS-2",
+            "harness_fix_disclosure": (
+                "FIX-1 (pre-execution, disclosed): service.least_busy(backend_list) raises "
+                "TypeError in qiskit-ibm-runtime 0.48.0 (internal qubits field is list not int). "
+                "Fixed: replaced with min(eligible, key=lambda b: b.status().pending_jobs). "
+                "Fix does NOT touch circuit, shots, cases, criteria, or decision procedure. "
+                "MANIFEST.sha256 recomputed and recommitted after fix. "
+                "Consistent with ARK-451 / WITNESS-1 harness-fix precedent."
+            ),
             "qiskit_version": "2.5.0",
             "qiskit_ibm_runtime_version": "0.48.0",
             "python_version": "3.11.6",
