@@ -5,8 +5,9 @@
 **Institution:** Remnant Fieldworks Inc.  
 **PI:** Derek Adam Hone  
 **Date of QPU Execution:** 2026-07-18  
-**Preregistration DOI:** [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381)  
-**WITNESS Series Concept DOI:** 10.5281/zenodo.21424323  
+**Zenodo published record (Preregistered Execution Record):** https://zenodo.org/records/21425381  
+**DOI (version):** [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381)  
+**DOI (concept, WITNESS series):** 10.5281/zenodo.21424323  
 **WITNESS-1 Reference DOI:** 10.5281/zenodo.21424324  
 
 ---
