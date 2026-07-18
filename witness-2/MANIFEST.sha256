@@ -1,0 +1,19 @@
+# WITNESS-2 MANIFEST — SHA-256 hashes of preregistration + all src files
+# Generated: 2026-07-18 UTC
+# Lock: committed before any QPU job is submitted; post-lock code changes prohibited.
+#
+# Algorithm: SHA-256
+# Paths: relative to witness-testbeds/ repository root
+
+982ee5efd77fc8ca2ca51811b2e821d6711504dc9ba679e74d1be3e8e15e89ee  witness-2/prereg/WITNESS-2-prereg.md
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  witness-2/src/__init__.py
+a79641df1eabe5b1ef0bff682f80fe7977362cb8913d6ad3c0a7de58789791cf  witness-2/src/ark457_replay.py
+b26effa1742f9a659d843e78a15c3eff6583221b87afab23b0a236c5735abba3  witness-2/src/calibration.py
+c37170b630da0add0fa439e552f94d48942f86d27129416455a15940698a9fc4  witness-2/src/case_w2c1_verify.py
+15a79b028bcbaf7bdabab102805f46787dbf6cfbac7fb812f15a9c261727f47b  witness-2/src/case_w2c2_tamper.py
+674ffd27ebe12a2bb7d7f1bacc1319950a0bf63f6fa0ee3759e1b4ff8529351b  witness-2/src/case_w2c3_replay.py
+97c9a74cc3f8ff98a4d2cacde2e01516fd7e510c725810566fa9d4073756e0b2  witness-2/src/nonce.py
+dd402006c7ddbbafc48475c50761b3bad179e062b2c1db1079ac3b10d471bab5  witness-2/src/proofrecord.py
+8f3eb0e8b9f425af63d52e3c99ccac2ef430f34724f6e902e9055fe3bfa5f309  witness-2/src/submit_job.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  witness-2/src/tests/__init__.py
+df499a02f767417624b2d778b2aea77b41855714046b99af94421d5f6316f86b  witness-2/src/tests/test_mock.py

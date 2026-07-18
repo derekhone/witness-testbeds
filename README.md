@@ -1,8 +1,21 @@
+# WITNESS Series — Quantum-Sourced Authorization Nonces with Verifiable Provenance
+
+**Author:** Derek Adam Hone / Remnant Fieldworks Inc.
+**Repository:** `witness-testbeds` — independent of `executionproof-testbeds` and `uip-phase1-testbeds`
+
+| Record | Title | Status | DOI |
+|--------|-------|--------|-----|
+| WITNESS-1 | Quantum-Sourced Nonces with Verifiable Provenance | Published | [10.5281/zenodo.21424324](https://doi.org/10.5281/zenodo.21424324) |
+| WITNESS-2 | Length-Prefixed Quantum Nonce with Record-Hash Field Integrity | Preregistered / Awaiting execution | — |
+
+**WITNESS series concept DOI:** [10.5281/zenodo.21424323](https://doi.org/10.5281/zenodo.21424323)
+
+---
+
 # WITNESS-1: Quantum-Sourced Authorization Nonces with Verifiable Provenance
 
 **Series:** WITNESS (first record)
-**Author:** Derek Adam Hone / Remnant Fieldworks Inc.
-**Status:** Preregistered / Execution pending
+**Status:** Published
 
 ---
 
@@ -92,3 +105,80 @@ from `executionproof-testbeds` and `uip-phase1-testbeds`.
 
 *Remnant Fieldworks Inc. — Preregistration-first. No post-hoc changes.*
 *Factual, understated. A FAIL is a feature.*
+
+
+---
+
+# WITNESS-2: Length-Prefixed Quantum Nonce with Record-Hash Field Integrity
+
+**Series:** WITNESS (second record)
+**Status:** Preregistered — awaiting execution (lock committed)
+
+---
+
+## Summary
+
+WITNESS-2 extends WITNESS-1 with two structural upgrades:
+
+1. **Length-prefixed nonce** — `LP(x) = 4-byte big-endian uint32 length + x`. Prevents
+   component-split length-extension ambiguity present in WITNESS-1's bare concatenation.
+2. **`record_hash` field-integrity seal** — `SHA-256(canonical_json(all fields except record_hash))`.
+   Detects any single-field substitution. Design boundary explicitly preregistered and tested:
+   `record_hash` = field integrity only; `context_id` enforcement = ARK-457 authorization layer.
+
+Four preregistered cases (W2-C2 has 4 sub-trials; W2-C3 has 2 sub-cases):
+
+| Case | Description | Expected |
+|------|-------------|----------|
+| W2-C1 | Honest end-to-end verification (provider-record provenance) | PASS |
+| W2-C2 | Substitution / tamper detection (4 sub-trials: counts, job_id, calibration, context_id) | PASS (all detected) |
+| W2-C3(a) | Cross-context replay — record_hash catches naive alteration | DENY (PASS) |
+| W2-C3(b) | Cross-context replay — attacker recomputes record_hash; ARK-457 fires | DENY (PASS) |
+
+---
+
+## Mandatory Scope Disclaimer
+
+> "Results apply within the tested circuit model, backend, qubits, calibration, shot
+> counts, software harnesses, and stated experimental conditions. This is an experimental
+> evidence record, not a universal security proof or production certification."
+
+---
+
+## Repository Structure
+
+```
+witness-testbeds/
+└── witness-2/
+    ├── prereg/
+    │   └── WITNESS-2-prereg.md         # Preregistration (locked before execution)
+    ├── src/
+    │   ├── __init__.py
+    │   ├── nonce.py                    # LP SHA-256 nonce; compute_quantum_nonce
+    │   ├── proofrecord.py              # ProofRecord build + verify (schema v1.0)
+    │   ├── calibration.py              # 10-field deterministic calibration extractor
+    │   ├── ark457_replay.py            # ARK-457 context-binding library (copied)
+    │   ├── submit_job.py               # Circuit submission harness
+    │   ├── case_w2c1_verify.py         # W2-C1: honest verification
+    │   ├── case_w2c2_tamper.py         # W2-C2: tamper/substitution detection (4 sub-trials)
+    │   ├── case_w2c3_replay.py         # W2-C3: cross-context replay (2 sub-cases)
+    │   └── tests/
+    │       └── test_mock.py            # 48 pre-lock mock tests (no QPU required)
+    ├── results/                        # Populated at execution
+    │   └── .gitkeep
+    └── MANIFEST.sha256                 # SHA-256 lock (prereg + all src files)
+```
+
+---
+
+## RF Process
+
+1. **Preregistration** — `witness-2/prereg/WITNESS-2-prereg.md` written and committed.
+2. **Mock tests** — 48/48 PASS confirmed before MANIFEST lock.
+3. **MANIFEST lock** — `witness-2/MANIFEST.sha256` committed; PR opened for Derek's review.
+4. **Execution** — `submit_job.py` run after PR merge; three case scripts run in order.
+5. **Results** — `witness-2/results/WITNESS-2-report.md` written with verdicts as-is.
+6. **Zenodo** — Draft deposit staged; Derek publishes manually.
+
+Post-lock code changes are prohibited. A harness defect blocking execution triggers
+gate-stop protocol; results published as-is regardless of outcome.
