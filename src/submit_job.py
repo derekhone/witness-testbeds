@@ -102,13 +102,13 @@ def main():
     # --- Connect to IBM Quantum ---
     try:
         from qiskit_ibm_runtime import QiskitRuntimeService, SamplerV2 as Sampler
-        from qiskit_ibm_runtime import Session
+        from qiskit_ibm_runtime import Batch
     except ImportError:
         print("ERROR: qiskit-ibm-runtime not installed. Run: pip install qiskit-ibm-runtime")
         sys.exit(1)
 
     print("Connecting to IBM Quantum...")
-    service = QiskitRuntimeService(channel="ibm_quantum", token=token)
+    service = QiskitRuntimeService(channel="ibm_quantum_platform", token=token)
 
     # Select least-busy backend with >= N_QUBITS qubits
     print("Selecting least-busy backend...")
@@ -139,8 +139,10 @@ def main():
     timestamp_utc = datetime.now(timezone.utc).isoformat()
     print(f"Submitting job at {timestamp_utc}...")
 
-    with Session(backend=backend) as session:
-        sampler = Sampler(session=session)
+    # Note: Session is not available on the open plan; Batch is used instead.
+    # Harness fix (pre-execution, disclosed): channel and execution mode corrected.
+    with Batch(backend=backend) as batch:
+        sampler = Sampler(mode=batch)
         job = sampler.run([qc_t], shots=SHOTS)
         job_id = job.job_id()
         print(f"Job submitted. job_id = {job_id}")
