@@ -54,7 +54,7 @@ def is_eligible(backend) -> bool:
 
 def main():
     from qiskit_ibm_runtime import QiskitRuntimeService, Batch, SamplerV2 as Sampler
-    from qiskit import QuantumCircuit
+    from qiskit import QuantumCircuit, transpile
 
     service = QiskitRuntimeService(channel="ibm_quantum_platform", token=load_token())
 
@@ -94,11 +94,17 @@ def main():
     backend = min(eligible, key=lambda b: b.status().pending_jobs)
     print(f"Selected: {backend.name} at {selection_time}")
 
-    # Circuit
+    # Circuit (logical definition — unchanged)
     qc = QuantumCircuit(N_QUBITS)
     qc.h(range(N_QUBITS))
     qc.measure_all()
     selected_qubits = list(range(N_QUBITS))
+
+    # FIX-2 (pre-execution, disclosed): IBM Quantum API requires ISA-compliant circuits
+    # as of March 2024. Transpile to backend native gate set before submission.
+    # Logical circuit (uniform H on all qubits) is unchanged; only gate representation differs.
+    qc_isa = transpile(qc, backend=backend, optimization_level=1)
+    print(f"Circuit transpiled to ISA (depth={qc_isa.depth()}, ops={dict(qc_isa.count_ops())})")
 
     # Calibration snapshot BEFORE submission
     cal_snapshot = extract_calibration_snapshot(backend, selected_qubits)
@@ -106,7 +112,7 @@ def main():
     # Submit
     submission_time = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     with Batch(backend=backend) as batch:
-        job = Sampler(mode=batch).run([qc], shots=SHOTS)
+        job = Sampler(mode=batch).run([qc_isa], shots=SHOTS)
         job_id = job.job_id()
         print(f"Job submitted: {job_id} at {submission_time}")
 
@@ -157,8 +163,12 @@ def main():
                 "FIX-1 (pre-execution, disclosed): service.least_busy(backend_list) raises "
                 "TypeError in qiskit-ibm-runtime 0.48.0 (internal qubits field is list not int). "
                 "Fixed: replaced with min(eligible, key=lambda b: b.status().pending_jobs). "
-                "Fix does NOT touch circuit, shots, cases, criteria, or decision procedure. "
-                "MANIFEST.sha256 recomputed and recommitted after fix. "
+                "Fix does NOT touch circuit, shots, cases, criteria, or decision procedure. | "
+                "FIX-2 (pre-execution, disclosed): IBM Quantum API requires ISA-compliant circuits "
+                "as of March 2024 (H gate rejected on ibm_fez native set). Added transpile(qc, "
+                "backend=backend, optimization_level=1) before submission. Logical circuit "
+                "(uniform 8-qubit H + measure_all) is unchanged; only gate representation differs. "
+                "MANIFEST.sha256 recomputed and recommitted after each fix. "
                 "Consistent with ARK-451 / WITNESS-1 harness-fix precedent."
             ),
             "qiskit_version": "2.5.0",
