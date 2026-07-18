@@ -1,0 +1,25 @@
+{
+  "circuit_spec": {
+    "alice_angles": {
+      "a": 0.0,
+      "a_prime": 1.5707963267948966
+    },
+    "alice_qubit": 0,
+    "bell_state": "phi_plus",
+    "bob_angles": {
+      "b": 0.7853981633974483,
+      "b_prime": 2.356194490192345
+    },
+    "bob_qubit": 1,
+    "n_settings": 4,
+    "shots_per_setting": 2000,
+    "sigma_threshold": 5.0,
+    "tsirelson_tolerance": 0.1
+  },
+  "context_id": "witness-4-freshness-bracket",
+  "intent": "WITNESS-4 freshness-bracket: non-backdatable, chain-linked quantum authorization nonce",
+  "kind": "witness-4-precommit",
+  "precommit_time_utc": "2026-07-18T23:24:56Z",
+  "prev_record_hash": "858ffd49fd7517fd58ef242226bd7c680bb5db5850a34256fedffd76df0f1caf",
+  "schema_version": "witness-precommit-4.0"
+}

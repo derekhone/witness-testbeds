@@ -1,0 +1,45 @@
+{
+  "case": "W4-C2",
+  "description": "Tamper detection across QPU/NIST/astro witnesses + precommit + ledger link (8 sub-trials)",
+  "verdict": "PASS",
+  "sub_trials": {
+    "a_raw_counts": {
+      "altered": "raw_counts (swap two counts)",
+      "forgery_detected": true
+    },
+    "b_job_id": {
+      "altered": "job_id (append _FORGED)",
+      "nonce_detected": true,
+      "record_hash_detected": true,
+      "forgery_detected": true
+    },
+    "c_calibration": {
+      "altered": "calibration_snapshot (flip one readout_error)",
+      "forgery_detected": true
+    },
+    "d_nist": {
+      "altered": "nist_witness (alter outputValue)",
+      "forgery_detected": true
+    },
+    "e_astro": {
+      "altered": "astro_witness (alter file_sha256)",
+      "forgery_detected": true
+    },
+    "f_context_id": {
+      "altered": "context_id (record_hash NOT recomputed)",
+      "forgery_detected": true
+    },
+    "g_precommit": {
+      "altered": "precommit doc (alter intent)",
+      "precommit_hash_detected": true,
+      "nonce_detected": true,
+      "forgery_detected": true
+    },
+    "h_prev_link": {
+      "altered": "prev_record_hash (flip ledger link)",
+      "nonce_detected": true,
+      "record_hash_detected": true,
+      "forgery_detected": true
+    }
+  }
+}

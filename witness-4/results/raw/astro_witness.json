@@ -1,0 +1,20 @@
+{
+  "source": "ligo_gwosc_open_data",
+  "event": "GW150914",
+  "detector": "H1",
+  "gps_start": 1126259446,
+  "duration_s": 32,
+  "sample_rate_hz": 4096,
+  "reference": "Abbott et al., PRL 116, 061102 (2016)",
+  "url": "https://gwosc.org/s/events/GW150914/H-H1_LOSC_4_V1-1126259446-32.hdf5",
+  "file_size_bytes": 1036463,
+  "file_sha256": "66c4b196d8b9e4d6be99c5a73173ad7a8285e6457ef55dc7710a6ebc057db669",
+  "strain_sample": {
+    "method": "hdf5_strain_window",
+    "sample_offset": 65536,
+    "sample_count": 4096,
+    "quantize_step": 1e-24,
+    "n_total_samples": 131072,
+    "strain_window_sha256": "5c628ac3804475ad7fa8e6bb997f165934eda83644f518a2006e712b98406e9b"
+  }
+}

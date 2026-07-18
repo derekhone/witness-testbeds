@@ -1,0 +1,54 @@
+{
+  "case": "W4-C5",
+  "description": "CHSH Bell-inequality violation certification (device-dependent)",
+  "verdict": "PASS",
+  "bell_certified": true,
+  "criteria": {
+    "c1_violation_over_2": true,
+    "c2_at_least_5_sigma": true,
+    "c3_within_tsirelson_tolerance": true,
+    "sigma_threshold": 5.0,
+    "tsirelson_tolerance": 0.1
+  },
+  "chsh": {
+    "S": 2.595,
+    "abs_S": 2.595,
+    "sigma_S": 0.03403091976423793,
+    "sigmas_above_classical": 17.484099875116154,
+    "classical_bound": 2.0,
+    "tsirelson_bound": 2.8284271247461903,
+    "correlators": {
+      "ab": 0.64,
+      "abp": -0.662,
+      "apb": 0.643,
+      "apbp": 0.65
+    },
+    "per_setting": {
+      "ab": {
+        "E": 0.64,
+        "shots": 2000,
+        "var_E": 0.0002952,
+        "sign_in_S": 1
+      },
+      "abp": {
+        "E": -0.662,
+        "shots": 2000,
+        "var_E": 0.000280878,
+        "sign_in_S": -1
+      },
+      "apb": {
+        "E": 0.643,
+        "shots": 2000,
+        "var_E": 0.0002932755,
+        "sign_in_S": 1
+      },
+      "apbp": {
+        "E": 0.65,
+        "shots": 2000,
+        "var_E": 0.00028874999999999994,
+        "sign_in_S": 1
+      }
+    }
+  },
+  "scope_note": "Certifies a Bell-inequality violation on the tested backend/circuit/qubits/calibration/shots under fair-sampling and no-signalling assumptions. NOT a loophole-free or device-independent certification."
+}

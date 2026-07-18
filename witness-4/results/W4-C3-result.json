@@ -1,0 +1,34 @@
+{
+  "case": "W4-C3",
+  "description": "Backdating / pre-computation detection via independent freshness-bracket re-evaluation",
+  "verdict": "PASS",
+  "honesty_note": "Establishes a NOT-BEFORE lower time bound and design-before-anchor ordering only. No upper time bound is claimed (a record can always be finalized later). This is a relative-ordering proof rooted in NIST pulse forward-unpredictability, NOT a trusted timestamping/notarization authority.",
+  "sub_cases": {
+    "a_backdate": {
+      "forged_timestamp_utc": "2026-07-18T22:27:00Z",
+      "freshness": {
+        "not_before_bound_ok": false,
+        "design_before_anchor_ok": true,
+        "fresh": false
+      },
+      "attack_detected": true
+    },
+    "b_precompute": {
+      "forged_precommit_time_utc": "2026-07-19T00:27:00Z",
+      "freshness": {
+        "not_before_bound_ok": true,
+        "design_before_anchor_ok": false,
+        "fresh": false
+      },
+      "attack_detected": true
+    },
+    "c_honest_baseline": {
+      "freshness": {
+        "not_before_bound_ok": true,
+        "design_before_anchor_ok": true,
+        "fresh": true
+      },
+      "fresh": true
+    }
+  }
+}

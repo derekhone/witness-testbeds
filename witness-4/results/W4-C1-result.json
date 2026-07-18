@@ -1,0 +1,24 @@
+{
+  "case": "W4-C1",
+  "description": "Zero-trust independent reconstruction from public artifacts + provider confirmation",
+  "verdict": "PASS",
+  "recomputed_fused_nonce": "01f07fd8f46e40cabf089f7cdbfb0648924732589d09d95d0e39fa9610e13f94",
+  "checks": {
+    "precommit_hash_match": true,
+    "fused_nonce_match": true,
+    "fused_nonce_verify": true,
+    "raw_counts_hash_match": true,
+    "cal_hash_match": true,
+    "nist_hash_match": true,
+    "astro_hash_match": true,
+    "record_hash_match": true,
+    "chsh_S_reproducible": true,
+    "nist_pulse_time_match": true,
+    "precommit_prev_link_match": true,
+    "all_reconstructed": true,
+    "freshness_fresh": true,
+    "provider_job_found": true,
+    "provider_counts_match": true,
+    "provenance_note": "Confirms stored job_id and per-setting counts match IBM provider API record at verification time. Does not confirm physical origin or quality of QPU randomness."
+  }
+}

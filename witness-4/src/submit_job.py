@@ -22,7 +22,8 @@ discovered as FIX-W3-1 in WITNESS-3 and is inherited here, NOT a post-lock WITNE
 
 import json
 import sys
-from datetime import datetime, timezone
+import time
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -173,10 +174,36 @@ def main():
     raw_counts = counts_by_setting
 
     # === STEP 3: fetch the random/public anchors AFTER the QPU results exist ===
-    print("Fetching NIST beacon witness (post-QPU; establishes not-before bound)...")
-    nist_witness = fetch_nist_witness()
+    # CRITICAL: fetch a NIST pulse whose timestamp is AFTER the precommit_time to ensure
+    # design_before_anchor_ok = true. NIST publishes every 60s on the minute; wait until
+    # we're past the next pulse boundary + margin, then fetch.
+    print("Fetching NIST beacon witness (post-QPU; must be after precommit for freshness)...")
+    # Parse precommit_time to determine the target pulse
+    pc = datetime.fromisoformat(precommit_time.replace('Z', '+00:00'))
+    target_pulse_time_str = (pc + timedelta(minutes=1)).replace(second=0, microsecond=0).strftime('%Y-%m-%dT%H:%M:%SZ')
+    
+    # Poll with backoff until we get a pulse >= target (NIST /pulse/last has ~3min delay)
+    nist_witness = None
+    delays = [10, 15, 20, 30, 45, 60]  # cumulative ~180s = 3 minutes max
+    for i, delay in enumerate(delays):
+        candidate = fetch_nist_witness()
+        if candidate["timeStamp"] > precommit_time:
+            nist_witness = candidate
+            break
+        print(f"  pulse {candidate['pulseIndex']} at {candidate['timeStamp']} is before precommit; retry in {delay}s ({i+1}/{len(delays)})...")
+        time.sleep(delay)
+    
+    if nist_witness is None:
+        # Final attempt
+        candidate = fetch_nist_witness()
+        if candidate["timeStamp"] > precommit_time:
+            nist_witness = candidate
+        else:
+            print(f"GATE-STOP: could not fetch a NIST pulse after precommit {precommit_time} within 180s")
+            sys.exit(2)
+    
     nist_pulse_time = nist_witness["timeStamp"]
-    print(f"  NIST pulseIndex={nist_witness['pulseIndex']} ts={nist_pulse_time}")
+    print(f"  NIST pulseIndex={nist_witness['pulseIndex']} ts={nist_pulse_time} (after precommit)")
     print("Fetching LIGO/GWOSC astro witness (GW150914 strain)...")
     astro_witness = fetch_astro_witness()
     print(f"  astro file_sha256={astro_witness['file_sha256'][:16]}... size={astro_witness['file_size_bytes']}B")

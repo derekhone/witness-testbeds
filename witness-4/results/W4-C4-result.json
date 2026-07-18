@@ -1,0 +1,23 @@
+{
+  "case": "W4-C4",
+  "description": "Append-only ledger chain integrity linking WITNESS-4 to WITNESS-3",
+  "verdict": "PASS",
+  "sub_cases": {
+    "a_honest_link": {
+      "prev_source": "witness-3/results/proofrecord.json (published, DOI 10.5281/zenodo.21434832)",
+      "prev_record_hash": "858ffd49fd7517fd58ef242226bd7c680bb5db5850a34256fedffd76df0f1caf",
+      "link_verified": true
+    },
+    "b_broken_link": {
+      "chain_link_detected": true,
+      "nonce_detected": true,
+      "record_hash_detected": true,
+      "attack_detected": true
+    },
+    "c_monotonic_order": {
+      "prev_timestamp_utc": "2026-07-18T22:33:56Z",
+      "current_timestamp_utc": "2026-07-18T23:30:09Z",
+      "monotonic": true
+    }
+  }
+}

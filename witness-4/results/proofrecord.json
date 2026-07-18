@@ -1,0 +1,39 @@
+{
+  "schema_version": "witness-proofrecord-4.0",
+  "fused_nonce": "01f07fd8f46e40cabf089f7cdbfb0648924732589d09d95d0e39fa9610e13f94",
+  "precommit_hash": "a29de09bef84f45954bd030a1f90b255a9f901694d5db3e74051fd15deb7c0b8",
+  "prev_record_hash": "858ffd49fd7517fd58ef242226bd7c680bb5db5850a34256fedffd76df0f1caf",
+  "job_id": "d9e0mjsjeosc73fi6b50",
+  "backend": "ibm_fez",
+  "provider_instance": "crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::",
+  "calibration_hash": "82543204b09b3083faab1d0420b1229acbe4152abee2ceae8d4af027a69dedd1",
+  "raw_counts_hash": "4c6b7f66fe3c0eea3096ad9f604713536b2050e1675e7e34c1e11422eca94b24",
+  "nist_hash": "6fb000218c6782b85a6e81329a15265a2aa82fe23bdfbc033bf6a937bcb54131",
+  "astro_hash": "4e9f0a786650a67913f866971a756113ed080dfd90e231710654ff0c80ffeb40",
+  "chsh": {
+    "S": 2.595,
+    "abs_S": 2.595,
+    "sigma_S": 0.03403091976423793,
+    "classical_bound": 2.0,
+    "tsirelson_bound": 2.8284271247461903,
+    "sigmas_above_classical": 17.484099875116154,
+    "correlators": {
+      "ab": 0.64,
+      "abp": -0.662,
+      "apb": 0.643,
+      "apbp": 0.65
+    }
+  },
+  "bell_certified": true,
+  "context_id": "witness-4-freshness-bracket",
+  "nist_pulse_time": "2026-07-18T23:27:00.000Z",
+  "precommit_time_utc": "2026-07-18T23:24:56Z",
+  "freshness": {
+    "not_before_bound_ok": true,
+    "design_before_anchor_ok": true,
+    "chain_monotonic_ok": true,
+    "fresh": true
+  },
+  "timestamp_utc": "2026-07-18T23:30:09Z",
+  "record_hash": "786ceb9a8bd46713de3b7da11cdb7f95518751381b885506d9c66d60c32e3dae"
+}

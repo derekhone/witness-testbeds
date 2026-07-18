@@ -4,9 +4,9 @@
 Fourth record in the WITNESS append-only ledger (W1 → W2 → W3 → **W4**), chained to
 WITNESS-3's published record_hash (Zenodo DOI 10.5281/zenodo.21434832).
 
-> Status: **PREREGISTERED — locked, awaiting author-approved QPU execution.**
-> No QPU job has been run for this record yet. `results/` is intentionally empty until the
-> real run.
+> Status: **EXECUTED — ALL 5 CASES PASS.**  
+> Job `d9e0mjsjeosc73fi6b50`, S=2.595±0.034 (17.5σ), `fresh=True`, `bell_certified=True`.  
+> Zenodo publication **HELD** for review and file-first IP-gate decision.
 
 ## What it adds over WITNESS-3
 
@@ -61,6 +61,14 @@ witness-4/
 ```
 python3 src/tests/test_mock.py     # 48 in-memory + simulator checks, zero QPU cost
 ```
+
+## Harness Fixes
+
+**FIX-W4-1 (NIST polling for freshness):** The NIST `/pulse/last` endpoint has ~3–5 minute propagation delay. To ensure `design_before_anchor_ok = true`, the harness polls with exponential backoff until it fetches a pulse whose `timeStamp` is strictly AFTER the `precommit_time_utc`. This fix was discovered and applied during the first live run (the initial attempt fetched a stale pulse, violating the freshness bracket). The fix is a **harness correction to achieve the preregistered design**, not a post-lock design change.
+
+**Channel note (inherited from WITNESS-3):** `channel="ibm_cloud"` was used from the outset (the correct open-plan channel; this was discovered as FIX-W3-1 in WITNESS-3 and is inherited here, **not** a post-lock WITNESS-4 fix).
+
+---
 
 **Trademarks (common-law / pending):** Remnant Fieldworks™, ExecutionProof™, ProofRecord™,
 Proof Before Power™, Verification Before Execution™.

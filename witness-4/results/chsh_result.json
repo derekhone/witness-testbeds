@@ -1,0 +1,41 @@
+{
+  "S": 2.595,
+  "abs_S": 2.595,
+  "sigma_S": 0.03403091976423793,
+  "classical_bound": 2.0,
+  "tsirelson_bound": 2.8284271247461903,
+  "violation_over_classical": 0.5950000000000002,
+  "sigmas_above_classical": 17.484099875116154,
+  "correlators": {
+    "ab": 0.64,
+    "abp": -0.662,
+    "apb": 0.643,
+    "apbp": 0.65
+  },
+  "per_setting": {
+    "ab": {
+      "E": 0.64,
+      "shots": 2000,
+      "var_E": 0.0002952,
+      "sign_in_S": 1
+    },
+    "abp": {
+      "E": -0.662,
+      "shots": 2000,
+      "var_E": 0.000280878,
+      "sign_in_S": -1
+    },
+    "apb": {
+      "E": 0.643,
+      "shots": 2000,
+      "var_E": 0.0002932755,
+      "sign_in_S": 1
+    },
+    "apbp": {
+      "E": 0.65,
+      "shots": 2000,
+      "var_E": 0.00028874999999999994,
+      "sign_in_S": 1
+    }
+  }
+}
