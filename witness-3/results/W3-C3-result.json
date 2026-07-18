@@ -1,0 +1,18 @@
+{
+  "case": "W3-C3",
+  "description": "Cross-context replay: field-integrity + ARK-457 two-layer defence",
+  "verdict": "PASS",
+  "sub_cases": {
+    "a_no_recompute": {
+      "record_hash_detected_mismatch": true,
+      "replay_denied": true
+    },
+    "b_recompute_then_ark457": {
+      "record_hash_valid_after_recompute": true,
+      "ark457_verdict": "DENY",
+      "ark457_reason": "Cross-context replay detected. Mismatched dimension(s): session: original='witness-3-cosmic-beacon' presented='witness-3-cosmic-beacon-REPLAYED'",
+      "replay_denied": true,
+      "design_boundary_note": "record_hash valid after recompute is the expected, correct behaviour: record_hash is a field-integrity seal, not a context-binding mechanism. The DENY verdict is produced by the ARK-457 authorization layer."
+    }
+  }
+}

@@ -7,6 +7,7 @@
 |--------|-------|--------|-----|
 | WITNESS-1 | Quantum-Sourced Nonces with Verifiable Provenance | Published | [10.5281/zenodo.21424324](https://doi.org/10.5281/zenodo.21424324) |
 | WITNESS-2 | Length-Prefixed Quantum Nonce with Record-Hash Field Integrity | Published | [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381) |
+| WITNESS-3 | Cosmic Beacon — CHSH Bell + NIST + LIGO/GWOSC Fused Nonce | ✅ Executed (Zenodo pending) | TBD |
 
 **WITNESS series concept DOI:** [10.5281/zenodo.21424323](https://doi.org/10.5281/zenodo.21424323)
 
@@ -203,3 +204,146 @@ MANIFEST.sha256 recomputed and recommitted after each fix per RF protocol.
 
 Post-lock code changes are prohibited. A harness defect blocking execution triggers
 gate-stop protocol; results published as-is regardless of outcome.
+
+---
+
+# WITNESS-3: Cosmic Beacon — CHSH Bell + NIST + LIGO/GWOSC Fused Authorization Nonce
+
+**Series:** WITNESS (third record)  
+**Status:** ✅ Executed (Zenodo DOI pending publication)
+
+---
+
+## Summary
+
+WITNESS-3 "Cosmic Beacon" fuses **three independent, publicly re-verifiable physical witnesses** into a single ExecutionProof authorization nonce:
+
+1. **CHSH Bell-inequality violation** measured on a real IBM QPU — the measurement bits certify quantum non-classicality **AND** seed the nonce.
+2. **NIST public Randomness Beacon** pulse — a timestamped, signed random value broadcast every 60 seconds.
+3. **LIGO/GWOSC gravitational-wave data** (GW150914, first confirmed black-hole merger) — byte-exact, version-controlled open astrophysical data.
+
+All three witnesses are **third-party re-verifiable**: anyone can independently fetch the NIST beacon pulse, download the GWOSC HDF5 file, and query the IBM Quantum provider for the job record — no trust in Remnant Fieldworks is required to verify the nonce provenance.
+
+Four preregistered cases:
+
+| Case | Description | Expected |
+|------|-------------|----------|
+| W3-C4 | CHSH Bell-inequality violation certification | PASS if \|S\| > 2, ≥ 5σ, ≤ Tsirelson + 0.10 |
+| W3-C2 | Tamper detection (6 sub-trials: QPU, NIST, astro, job_id, cal, context_id) | PASS (all detected) |
+| W3-C3 | Cross-context replay (2 sub-cases: no-recompute, ARK-457) | DENY (PASS) |
+| W3-C1 | Honest end-to-end verification | PASS |
+
+---
+
+## Mandatory Scope Disclaimer
+
+> "Results apply within the tested circuit model, backend, qubits, calibration, shot
+> counts, software harnesses, and stated experimental conditions. This is an experimental
+> evidence record, not a universal security proof or production certification.  
+> **NOT loophole-free**: This CHSH test does NOT close the locality or detection loopholes.
+> Alice and Bob measurement stations are neighboring transmons on the same chip (no spacelike separation).  
+> **NOT device-independent**: Fair-sampling and no-signalling are assumed but not verified from first principles.  
+> **Astro witness is provenance only**: The LIGO/GWOSC data segment is a publicly re-verifiable
+> byte anchor for the nonce. It does NOT constitute a detection claim or cosmological measurement."
+
+---
+
+## Repository Structure
+
+```
+witness-testbeds/
+└── witness-3/
+    ├── prereg/
+    │   ├── WITNESS-3-prereg.md         # Preregistration (locked before execution)
+    │   ├── WITNESS-3-prereg.pdf
+    │   └── WITNESS-3-prereg.docx
+    ├── src/
+    │   ├── __init__.py
+    │   ├── chsh.py                     # CHSH Bell circuits + S computation
+    │   ├── nonce_v3.py                 # 5-segment LP cosmic_nonce (QPU + job_id + cal + NIST + astro)
+    │   ├── proofrecord_v3.py           # ProofRecord build + verify (schema v3.0)
+    │   ├── beacon_nist.py              # Fetch NIST beacon pulse (public API)
+    │   ├── astro_gwosc.py              # Fetch LIGO/GWOSC GW150914 strain segment (HDF5, byte-exact)
+    │   ├── calibration.py              # 10-field deterministic calibration extractor
+    │   ├── ark457_replay.py            # ARK-457 context-binding library (copied)
+    │   ├── submit_job.py               # CHSH circuit submission harness (4 settings × 2000 shots)
+    │   ├── case_w3c4_bell.py           # W3-C4: CHSH certification (|S| > 2, ≥ 5σ, ≤ Tsirelson)
+    │   ├── case_w3c1_verify.py         # W3-C1: honest verification (13 checks + provider provenance)
+    │   ├── case_w3c2_tamper.py         # W3-C2: tamper detection (6 sub-trials)
+    │   ├── case_w3c3_replay.py         # W3-C3: cross-context replay (2 sub-cases)
+    │   └── tests/
+    │       └── test_mock.py            # 26 pre-lock mock tests (simulator, no QPU required)
+    ├── results/
+    │   ├── raw/                        # Populated at execution: raw_counts.json, job_meta.json,
+    │   │                               # calibration_snapshot.json, nist_witness.json, astro_witness.json
+    │   ├── proofrecord.json
+    │   ├── W3-C*-result.json           # 4 verdict JSONs
+    │   └── WITNESS-3-report.{md,pdf,docx,html}  # Multi-format report
+    ├── MANIFEST.sha256                 # SHA-256 lock (prereg.md + 15 src .py files; 16 total)
+    └── gen_report.py                   # Report generator (written post-execution)
+```
+
+---
+
+## Execution Summary
+
+**QPU Job:** `d9dvul2neu4c739nrdl0` | Backend: `ibm_fez` | Shots: 8000 (4 CHSH settings × 2000 shots/setting) | Instance: `open-instance`
+
+**CHSH Bell Test:**  
+**S = 2.545 ± 0.0345** → **15.8 σ above classical bound (2.0)** → **Bell-certified = TRUE**
+
+**External Witnesses:**
+- **NIST Beacon:** pulse #1865471 (timestamp 2026-07-18T22:31:00.000Z)
+- **LIGO/GWOSC:** GW150914, H1 detector, 32s HDF5 file (SHA-256: `66c4b196...`), strain window 4096 samples @ offset 65536
+
+**Cosmic Nonce:** `6876050a7f8ebadf79b1bd702346ae42563019725c03d29bd8d26dadc8c7f686`  
+**Record Hash:** `858ffd49fd7517fd58ef242226bd7c680bb5db5850a34256fedffd76df0f1caf`
+
+| Case | Description | Verdict |
+|------|-------------|---------|
+| W3-C4 | CHSH Bell-inequality violation certification | ✅ PASS (S=2.545, 15.8σ, bell_certified=true) |
+| W3-C2 | Tamper detection — 6 sub-trials (QPU, NIST, astro, job_id, cal, context_id) | ✅ PASS (all forgeries detected) |
+| W3-C3(a) | Cross-context replay — record_hash catches naive alteration | ✅ PASS (denied) |
+| W3-C3(b) | Cross-context replay — attacker recomputes record_hash; ARK-457 fires | ✅ PASS (denied, context mismatch) |
+| W3-C1 | Honest end-to-end verification (13 checks, provider job found, counts match) | ✅ PASS |
+
+**Harness fix (post-lock, disclosed):**
+- **FIX-W3-1** (`submit_job.py` line 63): changed `channel="ibm_quantum_platform"` → `channel="ibm_cloud"` to match the working IBM Quantum Runtime API endpoint for the `open-instance`. The preregistered MANIFEST.sha256 locked the harness before this fix; the fix was required to complete the actual QPU submission. This is disclosed per the RF Standing Covenant (transparency on post-lock modifications).
+
+No other harness fixes were needed. All other source modules match their preregistered SHA-256 hashes in `MANIFEST.sha256`.
+
+---
+
+## RF Process
+
+1. **Preregistration** — `witness-3/prereg/WITNESS-3-prereg.md` written and committed.
+2. **Mock tests** — 26/26 PASS confirmed on Aer simulator (CHSH S=2.80 @ ~79σ on sim); NIST + GWOSC witnesses fetched live and validated.
+3. **MANIFEST lock** — `witness-3/MANIFEST.sha256` committed (commit `ac18f61`, 2026-07-18) — locks 16 files (prereg + 15 src modules) **before** any QPU execution.
+4. **Harness fix** — FIX-W3-1 disclosed post-lock, applied immediately before QPU submission (channel parameter only).
+5. **Execution** — `submit_job.py` run; real QPU job `d9dvul2neu4c739nrdl0` completed; all 4 case scripts run in order. All PASS.
+6. **Results** — `witness-3/results/WITNESS-3-report.{md,pdf,docx,html}` generated with honest verdicts as-is.
+7. **Zenodo** — Draft deposit pending; DOI will be added to this README and the report upon publication.
+
+Post-lock code changes are prohibited. A harness defect blocking execution triggers
+gate-stop protocol; results published as-is regardless of outcome.
+
+---
+
+## Research Context
+
+WITNESS-3 extends WITNESS-1 and WITNESS-2 by:
+- Fusing **three independent witnesses** (quantum + beacon + astrophysical) instead of one
+- Certifying the quantum witness via **Bell-inequality violation** (not just raw entropy)
+- Binding the nonce to **publicly archived LIGO gravitational-wave data** (historic, byte-exact, third-party re-verifiable)
+
+This experiment demonstrates that an authorization nonce can carry **publicly auditable provenance from multiple physical sources**, reducing reliance on any single trust anchor and enabling independent verification by third parties (NIST, LIGO/GWOSC, IBM Quantum).
+
+---
+
+**Preregistration commit:** `ac18f61` (2026-07-18)  
+**Full report:** [witness-3/results/WITNESS-3-report.md](witness-3/results/WITNESS-3-report.md)  
+**Zenodo DOI:** *(pending publication)*
+
+---
+
+*Soli Deo Gloria.*

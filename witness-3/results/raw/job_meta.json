@@ -1,0 +1,40 @@
+{
+  "job_id": "d9dvul2neu4c739nrdl0",
+  "backend": "ibm_fez",
+  "provider_instance": "crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::",
+  "shots_per_setting": 2000,
+  "n_settings": 4,
+  "settings": [
+    {
+      "label": "ab",
+      "alice_angle": 0.0,
+      "bob_angle": 0.7853981633974483,
+      "sign_in_S": 1
+    },
+    {
+      "label": "abp",
+      "alice_angle": 0.0,
+      "bob_angle": 2.356194490192345,
+      "sign_in_S": -1
+    },
+    {
+      "label": "apb",
+      "alice_angle": 1.5707963267948966,
+      "bob_angle": 0.7853981633974483,
+      "sign_in_S": 1
+    },
+    {
+      "label": "apbp",
+      "alice_angle": 1.5707963267948966,
+      "bob_angle": 2.356194490192345,
+      "sign_in_S": 1
+    }
+  ],
+  "selection_time_utc": "2026-07-18T22:33:50.987958+00:00",
+  "submission_time_utc": "2026-07-18T22:33:56Z",
+  "channel": "ibm_quantum_platform",
+  "execution_mode": "Batch",
+  "qiskit_version": "2.5.0",
+  "qiskit_ibm_runtime_version": "0.48.0",
+  "python_version": "3.11"
+}

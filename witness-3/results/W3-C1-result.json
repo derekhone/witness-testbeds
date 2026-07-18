@@ -1,0 +1,22 @@
+{
+  "case": "W3-C1",
+  "description": "Honest end-to-end verification of fused Cosmic Beacon ProofRecord",
+  "verdict": "PASS",
+  "checks": {
+    "record_hash_match": true,
+    "cosmic_nonce_match": true,
+    "raw_counts_hash_match": true,
+    "cal_hash_match": true,
+    "nist_hash_match": true,
+    "astro_hash_match": true,
+    "chsh_S_reproducible": true,
+    "schema_version_match": true,
+    "context_id_present": true,
+    "provider_instance_present": true,
+    "nist_witness_present": true,
+    "astro_witness_present": true,
+    "provider_job_found": true,
+    "provider_counts_match": true,
+    "provenance_note": "Confirms: stored job_id and per-setting counts match IBM provider API record at verification time. Does not confirm physical origin or quality of QPU randomness."
+  }
+}

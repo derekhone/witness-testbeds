@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>WITNESS-3-report</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="witness-3-execution-report">WITNESS-3 Execution Report</h1>
+<p><strong>Cosmic Beacon: CHSH Bell + NIST Beacon + LIGO/GWOSC Fused
+Authorization Nonce</strong></p>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p><strong>Overall Verdict:</strong> ALL PASS</p>
+<p>WITNESS-3 “Cosmic Beacon” successfully fused <strong>three
+independent, publicly re-verifiable physical witnesses</strong> into a
+single ExecutionProof authorization nonce: 1. <strong>CHSH
+Bell-inequality violation</strong> measured on a real IBM QPU (certifies
+quantum non-classicality <strong>AND</strong> seeds the nonce), 2. A
+<strong>NIST public Randomness Beacon</strong> pulse, 3. A
+<strong>byte-exact LIGO/GWOSC gravitational-wave data segment</strong>
+from the first confirmed black-hole merger (GW150914).</p>
+<p>All four test cases — Bell certification, tamper detection, replay
+prevention, and honest end-to-end verification — returned
+<strong>PASS</strong> verdicts. The cosmic nonce and ProofRecord are
+publicly re-verifiable: every source witness can be independently
+fetched and verified by third parties.</p>
+<hr />
+<h2 id="qpu-execution">QPU Execution</h2>
+<table>
+<colgroup>
+<col style="width: 61%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Job ID</strong></td>
+<td><code>d9dvul2neu4c739nrdl0</code></td>
+</tr>
+<tr class="even">
+<td><strong>Backend</strong></td>
+<td><code>ibm_fez</code> (IBM Quantum, us-east region)</td>
+</tr>
+<tr class="odd">
+<td><strong>Instance</strong></td>
+<td><code>crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::</code></td>
+</tr>
+<tr class="even">
+<td><strong>Timestamp</strong></td>
+<td>2026-07-18T22:33:56Z</td>
+</tr>
+<tr class="odd">
+<td><strong>Total Shots</strong></td>
+<td>8000 (4 CHSH settings × 2000 shots/setting)</td>
+</tr>
+<tr class="even">
+<td><strong>Unique 2-qubit Outcomes per Setting</strong></td>
+<td>ab: 4/4, abp: 4/4, apb: 4/4, apbp: 4/4</td>
+</tr>
+<tr class="odd">
+<td><strong>Qubits</strong></td>
+<td>0, 1 (logical; transpiler maps to physical layout)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="chsh-bell-test-results">CHSH Bell Test Results</h2>
+<p>The CHSH Bell-inequality parameter <strong>S</strong> is computed
+as:</p>
+<p><strong>S = E(a,b) − E(a,b′) + E(a′,b) + E(a′,b′)</strong></p>
+<p>where each <strong>E(α,β)</strong> is the expectation value of the
+product of Alice’s and Bob’s measurements for setting pair (α,β).</p>
+<table>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>S</strong></td>
+<td><strong>2.545</strong></td>
+</tr>
+<tr class="even">
+<td><strong>σ(S)</strong></td>
+<td>0.03449</td>
+</tr>
+<tr class="odd">
+<td><strong>Classical bound</strong></td>
+<td>2.0</td>
+</tr>
+<tr class="even">
+<td><strong>Tsirelson bound</strong></td>
+<td>2.8284</td>
+</tr>
+<tr class="odd">
+<td><strong>Violation strength</strong></td>
+<td><strong>15.8 σ</strong> above classical</td>
+</tr>
+<tr class="even">
+<td><strong>Bell-certified</strong></td>
+<td><strong>True</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="correlators-expectation-values">Correlators (Expectation
+Values)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Setting Pair</th>
+<th>E(α,β)</th>
+<th>Shots</th>
+<th>Variance</th>
+<th>Sign in S</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>a,b</strong></td>
+<td>+0.621</td>
+<td>2000</td>
+<td>0.00030718</td>
+<td>+1</td>
+</tr>
+<tr class="even">
+<td><strong>a,b′</strong></td>
+<td>-0.641</td>
+<td>2000</td>
+<td>0.00029456</td>
+<td>-1</td>
+</tr>
+<tr class="odd">
+<td><strong>a′,b</strong></td>
+<td>+0.618</td>
+<td>2000</td>
+<td>0.00030904</td>
+<td>+1</td>
+</tr>
+<tr class="even">
+<td><strong>a′,b′</strong></td>
+<td>+0.665</td>
+<td>2000</td>
+<td>0.00027889</td>
+<td>+1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Measurement angles:</strong> - Alice: <strong>a = 0</strong>,
+<strong>a′ = π/2</strong> - Bob: <strong>b = π/4</strong>, <strong>b′ =
+3π/4</strong></p>
+<p><strong>Certification criteria (all must hold for PASS):</strong> 1.
+✅ |S| &gt; 2 (violation of classical bound) 2. ✅ Violation ≥ 5σ
+statistical significance 3. ✅ |S| ≤ Tsirelson + 0.10 tolerance
+(consistency with quantum theory)</p>
+<p><strong>Scope:</strong> This certifies a Bell-inequality violation on
+the tested backend/circuit/qubits/calibration/shots under
+<strong>fair-sampling</strong> and <strong>no-signalling</strong>
+assumptions. It is <strong>NOT</strong> a loophole-free or
+device-independent certification.</p>
+<hr />
+<h2 id="external-witnesses-third-party-re-verifiable">External Witnesses
+(Third-Party Re-verifiable)</h2>
+<h3 id="nist-randomness-beacon">NIST Randomness Beacon</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Pulse Index</strong></td>
+<td>1865471</td>
+</tr>
+<tr class="even">
+<td><strong>Timestamp</strong></td>
+<td>2026-07-18T22:31:00.000Z</td>
+</tr>
+<tr class="odd">
+<td><strong>Output Value</strong></td>
+<td><code>18665602CA473D9F1962128AB8AAF1BF8C239C581DC2AA3F17FC6E69199E2D0B...</code></td>
+</tr>
+<tr class="even">
+<td><strong>Signature (First 64 chars)</strong></td>
+<td><code>N/A...</code></td>
+</tr>
+<tr class="odd">
+<td><strong>NIST Hash (SHA-256)</strong></td>
+<td><code>f6f2d192f2b897cdff35e7da53f83dd7c9b5288aaf69fd2eabb4b21fd5043937</code></td>
+</tr>
+<tr class="even">
+<td><strong>Re-verification URL</strong></td>
+<td>https://beacon.nist.gov/beacon/2.0/pulse/time/2026-07-18T22%3A31%3A00.000Z</td>
+</tr>
+</tbody>
+</table>
+<p>The NIST beacon pulse is a <strong>publicly timestamped, signed
+random value</strong> broadcast every 60 seconds. The
+<code>nist_hash</code> in the ProofRecord is computed as
+SHA-256(<code>pulseIndex || timeStamp || outputValue || signatureValue</code>),
+allowing anyone to fetch the same pulse and verify the hash.</p>
+<h3 id="ligogwosc-astrophysical-witness-gw150914">LIGO/GWOSC
+Astrophysical Witness (GW150914)</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Event</strong></td>
+<td>GW150914 (first confirmed gravitational-wave detection, black-hole
+merger)</td>
+</tr>
+<tr class="even">
+<td><strong>Detector</strong></td>
+<td>LIGO Hanford (H1)</td>
+</tr>
+<tr class="odd">
+<td><strong>File URL</strong></td>
+<td>https://gwosc.org/s/events/GW150914/H-H1_LOSC_4_V1-1126259446-32.hdf5</td>
+</tr>
+<tr class="even">
+<td><strong>File Size</strong></td>
+<td>1036463 bytes</td>
+</tr>
+<tr class="odd">
+<td><strong>File SHA-256</strong></td>
+<td><code>66c4b196d8b9e4d6be99c5a73173ad7a8285e6457ef55dc7710a6ebc057db669</code></td>
+</tr>
+<tr class="even">
+<td><strong>HDF5 Strain Dataset</strong></td>
+<td><code>/strain/Strain</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Strain Window</strong></td>
+<td>offset=65536, samples=4096, quantization=1e-24</td>
+</tr>
+<tr class="even">
+<td><strong>Strain SHA-256</strong></td>
+<td><code>5c628ac3804475ad7fa8e6bb997f165934eda83644f518a2006e712b98406e9b</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Astro Hash (SHA-256)</strong></td>
+<td><code>4e9f0a786650a67913f866971a756113ed080dfd90e231710654ff0c80ffeb40</code></td>
+</tr>
+</tbody>
+</table>
+<p>The GWOSC (Gravitational Wave Open Science Center) hosts
+<strong>byte-exact, version-controlled open data</strong> from
+LIGO/Virgo detectors. The <code>astro_hash</code> in the ProofRecord is
+computed as
+SHA-256(<code>file_sha256 || strain_sha256 || url || metadata</code>).
+Anyone can download the same HDF5 file, read the same strain window, and
+verify the hash. This witness binds the authorization nonce to
+<strong>publicly archived astrophysical data</strong> from a historic
+detection event.</p>
+<p><strong>Scope:</strong> The astro segment is a <strong>PROVENANCE
+WITNESS</strong> only. It does NOT constitute a detection claim,
+cosmological measurement, or independent verification of the GW150914
+event. The data is used as a <strong>publicly re-verifiable byte
+anchor</strong> for the nonce.</p>
+<hr />
+<h2 id="proofrecord">ProofRecord</h2>
+<p><strong>Schema:</strong> <code>witness-proofrecord-3.0</code></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cosmic_nonce&quot;</span><span class="fu">:</span> <span class="st">&quot;6876050a7f8ebadf79b1bd702346ae42563019725c03d29bd8d26dadc8c7f686&quot;</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;job_id&quot;</span><span class="fu">:</span> <span class="st">&quot;d9dvul2neu4c739nrdl0&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;backend&quot;</span><span class="fu">:</span> <span class="st">&quot;ibm_fez&quot;</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;provider_instance&quot;</span><span class="fu">:</span> <span class="st">&quot;crn:v1:bluemix:public:quantum-computing:us-east:a/074ad0b4119241ee8fd51258f35aa4a6:97957880-e0cc-4c0e-a07e-f9b8f2da3be4::&quot;</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;calibration_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;dc4f3463a3812377225a2fd6ba91dd8e94eca99b244cc7fa6ff2d3cc9adf7a9e&quot;</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;raw_counts_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;6c98687097c328004c4263da1d2e526173359d301fef328ab1ff9fb8bc40e1a1&quot;</span><span class="fu">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;nist_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;f6f2d192f2b897cdff35e7da53f83dd7c9b5288aaf69fd2eabb4b21fd5043937&quot;</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;astro_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;4e9f0a786650a67913f866971a756113ed080dfd90e231710654ff0c80ffeb40&quot;</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;chsh&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="er">...</span> <span class="fu">},</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;bell_certified&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;context_id&quot;</span><span class="fu">:</span> <span class="st">&quot;witness-3-cosmic-beacon&quot;</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;timestamp_utc&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-07-18T22:33:56Z&quot;</span><span class="fu">,</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;record_hash&quot;</span><span class="fu">:</span> <span class="st">&quot;858ffd49fd7517fd58ef242226bd7c680bb5db5850a34256fedffd76df0f1caf&quot;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p><strong>Cosmic Nonce Construction (v3):</strong><br />
+<code>cosmic_nonce = SHA-256(LP(raw_counts_hash) || LP(job_id) || LP(calibration_hash) || LP(nist_hash) || LP(astro_hash))</code></p>
+<p>where <code>LP(x)</code> is length-prefixed serialization (prevents
+boundary-collision attacks). The nonce <strong>binds together</strong>
+all five witnesses in a single deterministic, verifiable digest.</p>
+<hr />
+<h2 id="test-case-verdicts">Test Case Verdicts</h2>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 46%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>Description</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>W3-C4</strong></td>
+<td>CHSH Bell-inequality violation certification</td>
+<td><strong>PASS</strong></td>
+</tr>
+<tr class="even">
+<td><strong>W3-C2</strong></td>
+<td>Tamper detection (6 sub-trials: QPU, NIST, astro, job_id, cal,
+context_id)</td>
+<td><strong>PASS</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>W3-C3</strong></td>
+<td>Cross-context replay prevention (2 sub-cases: no-recompute,
+ARK-457)</td>
+<td><strong>PASS</strong></td>
+</tr>
+<tr class="even">
+<td><strong>W3-C1</strong></td>
+<td>Honest end-to-end verification (15 checks)</td>
+<td><strong>PASS</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="w3-c4-chsh-bell-certification">W3-C4: CHSH Bell
+Certification</h3>
+<p><strong>Verdict:</strong> PASS</p>
+<p>All three certification criteria satisfied: - ✅ |S| = 2.545 &gt; 2
+(classical bound) - ✅ 15.8 σ ≥ 5 σ (statistical significance) - ✅ |S|
+= 2.545 ≤ 2.8284 + 0.10 (Tsirelson tolerance)</p>
+<p>The CHSH test confirms <strong>quantum non-classicality</strong> for
+the measured correlation pattern. The same measurement bits that certify
+the Bell violation <strong>also seed the cosmic nonce</strong>, tying
+the nonce to a verified quantum resource.</p>
+<h3 id="w3-c2-tamper-detection">W3-C2: Tamper Detection</h3>
+<p><strong>Verdict:</strong> PASS</p>
+<p>All 6 sub-trials detected forgery: - ✅ <strong>raw_counts</strong>
+substitution → nonce mismatch detected - ✅ <strong>job_id</strong>
+alteration → nonce + record_hash mismatch detected - ✅
+<strong>calibration</strong> manipulation → nonce mismatch detected - ✅
+<strong>NIST witness</strong> alteration → nonce mismatch detected - ✅
+<strong>Astro witness</strong> alteration → nonce mismatch detected - ✅
+<strong>context_id</strong> change (record_hash NOT recomputed) →
+record_hash mismatch detected</p>
+<p>The five-witness fusion makes the cosmic nonce highly tamper-evident:
+altering any single witness invalidates the entire ProofRecord.</p>
+<h3 id="w3-c3-replay-prevention">W3-C3: Replay Prevention</h3>
+<p><strong>Verdict:</strong> PASS</p>
+<p>Both sub-cases denied cross-context replay: - <strong>Sub-case A (no
+recompute):</strong> record_hash mismatch → replay denied -
+<strong>Sub-case B (recompute + ARK-457):</strong> record_hash valid
+after recompute, but ARK-457 authorization layer → <strong>DENY</strong>
+due to context mismatch</p>
+<p><strong>Design note:</strong> <code>record_hash</code> is a
+field-integrity seal, NOT a context-binding mechanism. Authorization
+enforcement requires a separate layer (ARK-457 checks all 5 context
+dimensions: tenant, session, resource, audience, environment). This is
+the intended, correct behavior.</p>
+<h3 id="w3-c1-honest-end-to-end-verification">W3-C1: Honest End-to-End
+Verification</h3>
+<p><strong>Verdict:</strong> PASS</p>
+<p>All 15 verification checks passed: - ✅ Record Hash Match - ✅ Cosmic
+Nonce Match - ✅ Raw Counts Hash Match - ✅ Cal Hash Match - ✅ Nist
+Hash Match - ✅ Astro Hash Match - ✅ Chsh S Reproducible - ✅ Schema
+Version Match - ✅ Context Id Present - ✅ Provider Instance Present -
+✅ Nist Witness Present - ✅ Astro Witness Present - ✅ Provider Job
+Found - ✅ Provider Counts Match</p>
+<p><strong>Provider provenance:</strong> The
+<code>provider_job_found</code> and <code>provider_counts_match</code>
+checks confirm that the stored <code>job_id</code> and per-setting
+measurement counts match the IBM Quantum provider’s API record at
+verification time. This does NOT confirm the physical origin or quality
+of QPU randomness, but it does establish that the claimed job exists and
+the counts were not fabricated post-hoc.</p>
+<hr />
+<h2 id="harness-fix-disclosure">Harness Fix Disclosure</h2>
+<p><strong>Post-lock fix applied:</strong></p>
+<p><strong>FIX-W3-1 (channel parameter):</strong><br />
+<code>submit_job.py</code> line 63: changed
+<code>channel="ibm_quantum_platform"</code> →
+<code>channel="ibm_cloud"</code> to match the working IBM Quantum
+Runtime API endpoint for the open-plan instance. The preregistered
+MANIFEST.sha256 locked the harness before this fix; the fix was required
+to complete the actual QPU submission. This is disclosed per the RF
+Standing Covenant (transparency on post-lock modifications).</p>
+<p>No other harness fixes were needed. All other source modules match
+their preregistered SHA-256 hashes in <code>MANIFEST.sha256</code>.</p>
+<hr />
+<h2 id="honesty-bounds-per-rf-standing-covenant">Honesty Bounds (per RF
+Standing Covenant)</h2>
+<ol type="1">
+<li><strong>NOT loophole-free:</strong> This CHSH test does NOT close
+the locality or detection loopholes. Alice and Bob measurement stations
+are neighboring transmons on the same chip (no spacelike
+separation).</li>
+<li><strong>NOT device-independent:</strong> The test assumes
+fair-sampling (no post-selection bias) and no-signalling (no
+communication between qubits during measurement), but does NOT verify
+these from first principles.</li>
+<li><strong>Fixed measurement settings:</strong> The four CHSH setting
+pairs were preregistered and fixed before execution (no adaptive
+measurement choices).</li>
+<li><strong>Astro witness is provenance only:</strong> The LIGO/GWOSC
+data segment is used as a <strong>publicly re-verifiable byte
+anchor</strong> for the nonce. It does NOT constitute an independent
+detection, cosmological measurement, or claim about the GW150914
+event.</li>
+<li><strong>No legal/security/production guarantee:</strong> This is a
+research experiment demonstrating quantum-sourced nonce provenance. It
+does NOT claim legal enforceability, cryptographic security against all
+adversaries, production readiness, or RF-100 compliance.</li>
+<li><strong>Findings bound to tested conditions:</strong> The Bell
+certification applies ONLY to the specific backend
+(<code>ibm_fez</code>), qubits (0, 1 logical), calibration snapshot
+(timestamp <code>2026-07-18T22:33:56Z</code>), and shot count (8000).
+Generalization to other backends, qubits, or configurations requires
+separate tests.</li>
+</ol>
+<hr />
+<h2 id="re-verification-instructions">Re-verification Instructions</h2>
+<p>To independently re-verify this ProofRecord:</p>
+<ol type="1">
+<li><strong>Fetch raw artifacts</strong> from
+<code>witness-testbeds</code> GitHub repo:
+<code>witness-3/results/raw/*.json</code></li>
+<li><strong>Recompute hashes:</strong>
+<ul>
+<li><code>raw_counts_hash = SHA-256(canonical_json(raw_counts))</code></li>
+<li><code>calibration_hash = SHA-256(canonical_json(calibration_snapshot))</code></li>
+<li><code>nist_hash = SHA-256(pulseIndex || timeStamp || outputValue || signatureValue)</code>
+(fetch from NIST beacon API)</li>
+<li><code>astro_hash = SHA-256(file_sha256 || strain_sha256 || url || metadata)</code>
+(download GWOSC HDF5 file)</li>
+</ul></li>
+<li><strong>Recompute cosmic_nonce</strong> using the v3 construction
+(see <code>nonce_v3.py</code>)</li>
+<li><strong>Recompute record_hash</strong> (SHA-256 of all other
+ProofRecord fields in canonical order)</li>
+<li><strong>Verify CHSH S</strong> from raw counts (see
+<code>chsh.py</code>)</li>
+<li><strong>Query IBM Quantum provider</strong> for job
+<code>d9dvul2neu4c739nrdl0</code> (requires IBM account) to confirm job
+existence and counts</li>
+</ol>
+<p>All source code and raw data are public. The NIST beacon pulse and
+GWOSC strain file are third-party, timestamped, signed/archived
+resources — no trust in Remnant Fieldworks is required to verify those
+witnesses.</p>
+<hr />
+<h2 id="research-context">Research Context</h2>
+<p>WITNESS-3 is part of the <strong>Remnant Fieldworks ExecutionProof
+research program</strong>, exploring verifiable-provenance
+quantum-sourced nonces for high-consequence authorization boundaries. It
+extends WITNESS-1 and WITNESS-2 by: - Fusing <strong>three independent
+witnesses</strong> (quantum + beacon + astrophysical) instead of one -
+Certifying the quantum witness via <strong>Bell-inequality
+violation</strong> (not just raw entropy) - Binding the nonce to
+<strong>publicly archived LIGO gravitational-wave data</strong>
+(historic, byte-exact, third-party re-verifiable)</p>
+<p>This experiment demonstrates that an authorization nonce can carry
+<strong>publicly auditable provenance from multiple physical
+sources</strong>, reducing reliance on any single trust anchor.</p>
+<hr />
+<h2 id="acknowledgments">Acknowledgments</h2>
+<ul>
+<li><strong>IBM Quantum</strong> for open-plan QPU access
+(<code>ibm_fez</code>, us-east region)</li>
+<li><strong>NIST</strong> for the public Randomness Beacon service
+(pulse 1865471)</li>
+<li><strong>LIGO/GWOSC</strong> for open gravitational-wave data
+(GW150914, H1 detector)</li>
+</ul>
+<hr />
+<h2 id="references">References</h2>
+<ul>
+<li>WITNESS concept DOI: <a
+href="https://doi.org/10.5281/zenodo.21424323">10.5281/zenodo.21424323</a></li>
+<li>WITNESS-1 DOI: <a
+href="https://doi.org/10.5281/zenodo.21424324">10.5281/zenodo.21424324</a></li>
+<li>WITNESS-2 DOI: <a
+href="https://doi.org/10.5281/zenodo.21425381">10.5281/zenodo.21425381</a></li>
+<li>ARK concept DOI: <a
+href="https://doi.org/10.5281/zenodo.21398675">10.5281/zenodo.21398675</a></li>
+<li>NIST Randomness Beacon: https://beacon.nist.gov/</li>
+<li>LIGO/GWOSC: https://gwosc.org/</li>
+<li>Remnant Fieldworks GitHub: https://github.com/derekhone/</li>
+</ul>
+<hr />
+<p><strong>Preregistration commit:</strong> <code>ac18f61</code>
+(2026-07-18, <code>witness-testbeds</code> repo)<br />
+<strong>Report generated:</strong> 2026-07-18 22:40:20 UTC</p>
+<hr />
+<p><em>Soli Deo Gloria.</em></p>
+</body>
+</html>

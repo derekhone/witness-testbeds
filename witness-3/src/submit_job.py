@@ -60,7 +60,7 @@ def main():
     from qiskit_ibm_runtime import QiskitRuntimeService, Batch, SamplerV2 as Sampler
     from qiskit import transpile
 
-    service = QiskitRuntimeService(channel="ibm_quantum_platform", token=load_token())
+    service = QiskitRuntimeService(channel="ibm_cloud", token=load_token())
 
     usage = service.usage()
     remaining = usage.get('usage_remaining_seconds', 0) if isinstance(usage, dict) else 0
