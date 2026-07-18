@@ -1,0 +1,40 @@
+{
+  "case": "W2-C2",
+  "description": "Substitution / tamper detection (4 sub-trials)",
+  "verdict": "PASS",
+  "sub_trials": [
+    {
+      "sub_trial": "a",
+      "substitution": "raw_counts_altered",
+      "quantum_nonce_match": false,
+      "forgery_detected": true,
+      "detection_layer": "quantum_nonce",
+      "sub_verdict": "PASS"
+    },
+    {
+      "sub_trial": "b",
+      "substitution": "job_id_altered",
+      "quantum_nonce_match": false,
+      "record_hash_match": false,
+      "forgery_detected": true,
+      "detection_layer": "quantum_nonce and record_hash",
+      "sub_verdict": "PASS"
+    },
+    {
+      "sub_trial": "c",
+      "substitution": "calibration_snapshot_altered",
+      "quantum_nonce_match": false,
+      "forgery_detected": true,
+      "detection_layer": "quantum_nonce",
+      "sub_verdict": "PASS"
+    },
+    {
+      "sub_trial": "d",
+      "substitution": "context_id_altered_record_hash_not_updated",
+      "record_hash_match": false,
+      "forgery_detected": true,
+      "detection_layer": "record_hash",
+      "sub_verdict": "PASS"
+    }
+  ]
+}

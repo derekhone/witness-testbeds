@@ -1,0 +1,17 @@
+{
+  "case": "W2-C1",
+  "description": "Honest end-to-end verification (provider-record provenance)",
+  "verdict": "PASS",
+  "checks": {
+    "record_hash_match": true,
+    "quantum_nonce_match": true,
+    "raw_counts_hash_match": true,
+    "cal_hash_match": true,
+    "schema_version_match": true,
+    "context_id_present": true,
+    "provider_instance_present": true,
+    "provider_job_found": true,
+    "provider_counts_match": true,
+    "provenance_note": "Confirms: stored job_id and counts match IBM provider API record at verification time. Does not confirm physical origin or quality of QPU randomness."
+  }
+}
