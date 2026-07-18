@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WITNESS-1 Results Report</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});"></script>
+<style>
+/* ─── Page setup ─── */
+@page {
+  size: A4;
+  margin: 2.2cm 2cm 2.2cm 2cm;
+  @top-right {
+    content: "WITNESS-1 Results Report";
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8pt;
+    color: #888;
+  }
+  @bottom-center {
+    content: counter(page);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8.5pt;
+    color: #888;
+  }
+}
+@page :first {
+  margin: 0;
+  @top-right  { content: none; }
+  @bottom-center { content: none; }
+}
+
+/* ─── Base ─── */
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 10.5pt;
+  color: #222;
+  line-height: 1.62;
+  text-align: justify;
+  text-align-last: left;
+  string-set: doctitle "";
+}
+
+/* ─── Cover / header block ─── */
+.cover {
+  width: 210mm;
+  height: 297mm;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  background: linear-gradient(160deg, #0b1a35 0%, #12284f 45%, #0f2244 70%, #0b1a35 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3cm 2.5cm;
+}
+
+.cover-series {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9pt;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #7eb8f7;
+  margin-bottom: 18px;
+}
+
+.cover h1 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 28pt;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 12px 0;
+  padding: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  string-set: doctitle "";
+}
+
+.cover-subtitle {
+  font-family: Georgia, serif;
+  font-size: 12.5pt;
+  color: #a8c8f0;
+  margin-bottom: 48px;
+  font-style: italic;
+}
+
+.cover-meta {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  padding-top: 24px;
+  width: 100%;
+}
+
+.cover-meta table {
+  border: none;
+  width: auto;
+  background: transparent;
+}
+.cover-meta td {
+  border: none;
+  padding: 4px 24px 4px 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9.5pt;
+  color: #ccddf5;
+  background: transparent;
+  vertical-align: top;
+}
+.cover-meta td:first-child {
+  color: #7eb8f7;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.cover-verdict {
+  margin-top: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(22, 163, 74, 0.2);
+  border: 1.5px solid #22c55e;
+  border-radius: 6px;
+  padding: 10px 22px;
+}
+.cover-verdict .verdict-label {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.cover-verdict .verdict-check {
+  font-size: 14pt;
+  color: #4ade80;
+}
+
+.cover-footer {
+  position: absolute;
+  bottom: 2cm;
+  left: 2.5cm;
+  right: 2.5cm;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 14px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 8pt;
+  color: #607d9e;
+}
+
+/* ─── Body content ─── */
+.content {
+  padding: 0;
+}
+
+h1.section-title {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 17pt;
+  font-weight: 700;
+  color: #0b1a35;
+  margin: 0 0 6px 0;
+  page-break-after: avoid;
+  border-bottom: 2.5px solid #0b1a35;
+  padding-bottom: 6px;
+}
+
+h2 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #0f2244;
+  margin: 26px 0 8px 0;
+  page-break-after: avoid;
+  border-bottom: 1px solid #c5d5ea;
+  padding-bottom: 4px;
+}
+
+h3 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 11.5pt;
+  font-weight: 700;
+  color: #1a3560;
+  margin: 20px 0 8px 0;
+  page-break-after: avoid;
+}
+
+p { margin: 0 0 10px 0; }
+
+/* ─── Verdict badge (inline) ─── */
+.verdict-pass {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  border: 1.5px solid #22c55e;
+  border-radius: 4px;
+  padding: 3px 12px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  color: #15803d;
+  margin-bottom: 10px;
+}
+
+/* ─── Blockquote / disclaimer ─── */
+blockquote {
+  margin: 14px 0;
+  padding: 12px 18px;
+  border-left: 4px solid #3b6abf;
+  background: #f0f5ff;
+  color: #334;
+  font-style: italic;
+  font-size: 10pt;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+blockquote p { margin: 0; }
+
+/* ─── Tables ─── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9.5pt;
+  margin: 12px 0 20px 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+thead tr {
+  background: #0f2244;
+  color: #fff;
+}
+thead th {
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9pt;
+  letter-spacing: 0.3px;
+}
+tbody tr:nth-child(even) { background: #f4f7fb; }
+tbody tr:nth-child(odd)  { background: #ffffff; }
+td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #dce6f0;
+  vertical-align: top;
+  word-break: break-all;
+}
+td:first-child { font-weight: 600; color: #0f2244; word-break: normal; white-space: nowrap; }
+
+/* sub-trial table — first col normal weight */
+.subtrial-table td:first-child {
+  font-weight: 400;
+  color: #222;
+  white-space: normal;
+}
+
+/* pass indicator in table */
+td .pass-cell {
+  color: #15803d;
+  font-weight: 600;
+}
+
+/* ─── Code block ─── */
+pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 8.5pt;
+  background: #f5f7fa;
+  border: 1px solid #d0daea;
+  border-left: 4px solid #3b6abf;
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin: 12px 0 20px 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 100%;
+  box-sizing: border-box;
+  line-height: 1.55;
+  color: #1a1a2e;
+}
+
+/* ─── Ordered / unordered lists ─── */
+ol, ul {
+  margin: 8px 0 14px 0;
+  padding-left: 22px;
+}
+li { margin-bottom: 5px; }
+
+/* ─── Overflow prevention ─── */
+pre, table, figure, img, svg, blockquote, code {
+  max-width: 100%; box-sizing: border-box; overflow-wrap: break-word;
+}
+a { word-break: break-all; color: #1d4ed8; }
+.katex-display { overflow-x: auto; max-width: 100%; }
+
+/* ─── Page breaks ─── */
+h2, h3 { page-break-after: avoid; }
+figure { page-break-inside: avoid; max-height: 70vh; height: auto; width: 100%; object-fit: contain; }
+tr, li { page-break-inside: avoid; }
+
+/* ─── Section divider ─── */
+.section-rule {
+  border: none;
+  border-top: 1px solid #d0daea;
+  margin: 22px 0 18px 0;
+}
+
+/* ─── Footer note ─── */
+.doc-footer {
+  margin-top: 28px;
+  border-top: 1px solid #d0daea;
+  padding-top: 12px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 8.5pt;
+  color: #666;
+  text-align: center;
+}
+.doc-footer p { margin: 3px 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ COVER ═══════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-series">Remnant Fieldworks &mdash; WITNESS Series &mdash; First Record</div>
+  <h1>WITNESS-1 Results Report</h1>
+  <div class="cover-subtitle">Quantum-Sourced Authorization Nonces with Verifiable Provenance</div>
+
+  <div class="cover-meta">
+    <table>
+      <tbody>
+        <tr><td>Series</td><td>WITNESS (first record)</td></tr>
+        <tr><td>Author</td><td>Derek Adam Hone / Remnant Fieldworks Inc.</td></tr>
+        <tr><td>Execution Date</td><td>2026-07-18 (UTC)</td></tr>
+        <tr><td>DOI (version)</td><td>https://doi.org/10.5281/zenodo.21424324</td></tr>
+        <tr><td>DOI (concept)</td><td>https://doi.org/10.5281/zenodo.21424323</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cover-verdict">
+      <span class="verdict-check">&#10003;</span>
+      <span class="verdict-label">Overall Verdict: PASS</span>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    Remnant Fieldworks RF Process &nbsp;&bull;&nbsp; Preregistration-first &nbsp;&bull;&nbsp; Results published as-is
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ BODY ═══════════════════════════════════ -->
+<div class="content">
+
+  <!-- Scope Disclaimer -->
+  <h2>Mandatory Scope Disclaimer</h2>
+  <blockquote>
+    <p>&#8220;Results apply within the tested circuit model, backend, qubits, calibration, shot counts, software harnesses, and stated experimental conditions. This is an experimental evidence record, not a universal security proof or production certification.&#8221;</p>
+  </blockquote>
+
+  <hr class="section-rule">
+
+  <!-- Harness Fix Disclosure -->
+  <h2>Harness Fix Disclosure <span style="font-size:9pt;font-weight:400;color:#555;">(pre-execution, mandatory per RF protocol)</span></h2>
+
+  <p>Two corrections were made to the harness before execution. Neither touches the circuit, procedure, criteria, thresholds, or oracle:</p>
+
+  <ol>
+    <li><strong>Channel name:</strong> <code>ibm_quantum</code> &#8594; <code>ibm_quantum_platform</code> (API string changed in qiskit-ibm-runtime 0.48.0; old string rejected at connection time).</li>
+    <li><strong>Execution mode:</strong> <code>Session</code> &#8594; <code>Batch</code> (Session not available on the open plan; Batch produces identical circuit execution semantics for single-job submissions).</li>
+  </ol>
+
+  <p>These fixes are disclosed here and in <code>results/raw/job_meta.json</code>. The MANIFEST.sha256 covers the pre-fix code; the corrected files are committed on the results branch with this disclosure note. The preregistered procedure, criteria, and verdict rules are unchanged.</p>
+
+  <hr class="section-rule">
+
+  <!-- QPU Execution Record -->
+  <h2>QPU Execution Record</h2>
+
+  <table>
+    <thead><tr><th>Field</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Backend</td><td>ibm_fez (156-qubit Heron r2)</td></tr>
+      <tr><td>Job ID</td><td>d9dgp6kjeosc73fhigsg</td></tr>
+      <tr><td>Shots</td><td>4,000</td></tr>
+      <tr><td>Unique outcomes</td><td>256 (all 2&#x2078; = 256 bitstrings observed)</td></tr>
+      <tr><td>Submission timestamp (UTC)</td><td>2026-07-18T05:17:54.918200+00:00</td></tr>
+      <tr><td>Qubits</td><td>8, Hadamard on all, measure all</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="section-rule">
+
+  <!-- ProofRecord -->
+  <h2>ProofRecord</h2>
+
+<pre>{
+  "schema": "witness.proofrecord/v1",
+  "nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+  "job_id": "d9dgp6kjeosc73fhigsg",
+  "backend": "ibm_fez",
+  "calibration_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+  "timestamp_utc": "2026-07-18T05:17:54.918200+00:00",
+  "raw_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+  "context_id": "witness-1-primary"
+}</pre>
+
+  <hr class="section-rule">
+
+  <!-- Case Results -->
+  <h2>Case Results</h2>
+
+  <!-- W1-C1 -->
+  <h3>W1-C1 &#8212; Honest Verification</h3>
+  <div class="verdict-pass">&#10003;&nbsp; PASS</div>
+
+  <p>Procedure: Recomputed nonce from stored raw counts + job ID + calibration snapshot; verified against ProofRecord nonce. Independently confirmed job ID and counts against the IBM Quantum provider API.</p>
+
+  <table>
+    <thead><tr><th>Check</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>nonce_match</td><td><span class="pass-cell">True</span></td></tr>
+      <tr><td>counts_hash_match</td><td><span class="pass-cell">True</span></td></tr>
+      <tr><td>cal_hash_match</td><td><span class="pass-cell">True</span></td></tr>
+      <tr><td>jobid_match</td><td><span class="pass-cell">True</span></td></tr>
+      <tr><td>provider job_found</td><td><span class="pass-cell">True</span></td></tr>
+      <tr><td>provider counts_match</td><td><span class="pass-cell">True</span></td></tr>
+    </tbody>
+  </table>
+
+  <p>Verification succeeded end-to-end. Meets PASS criterion.</p>
+
+  <!-- W1-C2 -->
+  <h3>W1-C2 &#8212; Substitution / Tamper Detection</h3>
+  <div class="verdict-pass">&#10003;&nbsp; PASS</div>
+
+  <p>Procedure: Three independent sub-trials, one field substituted each time.</p>
+
+  <table class="subtrial-table">
+    <thead><tr><th>Sub-trial</th><th>Substitution</th><th>Forgery detected</th><th>Sub-verdict</th></tr></thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:400;white-space:normal;">(a)</td>
+        <td style="font-weight:400;">raw_counts altered</td>
+        <td style="font-weight:400;"><span class="pass-cell">True (nonce_match=False)</span></td>
+        <td style="font-weight:700;color:#15803d;">PASS</td>
+      </tr>
+      <tr>
+        <td style="font-weight:400;white-space:normal;">(b)</td>
+        <td style="font-weight:400;">job_id altered</td>
+        <td style="font-weight:400;"><span class="pass-cell">True (nonce_match=False)</span></td>
+        <td style="font-weight:700;color:#15803d;">PASS</td>
+      </tr>
+      <tr>
+        <td style="font-weight:400;white-space:normal;">(c)</td>
+        <td style="font-weight:400;">calibration_snapshot altered</td>
+        <td style="font-weight:400;"><span class="pass-cell">True (nonce_match=False)</span></td>
+        <td style="font-weight:700;color:#15803d;">PASS</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>All three substitutions detected as forged. Meets PASS criterion.</p>
+
+  <!-- W1-C3 -->
+  <h3>W1-C3 &#8212; Cross-Context Replay</h3>
+  <div class="verdict-pass">&#10003;&nbsp; PASS</div>
+
+  <p>Procedure: Presented valid ProofRecord (<code>context_id="witness-1-primary"</code>) to a second authorization context (<code>context_id="witness-1-replay-context"</code>) using the ARK-457 replay-protection logic (5-dimensional context tuple, exact match required).</p>
+
+  <table>
+    <thead><tr><th>Check</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Original context decision</td><td>ALLOW</td></tr>
+      <tr><td>Replay context decision</td><td><span class="pass-cell">DENY</span></td></tr>
+      <tr><td>Mismatched dimension(s)</td><td>session</td></tr>
+    </tbody>
+  </table>
+
+  <p>Replay denied. Meets PASS criterion (DENY = PASS per preregistration).</p>
+
+  <hr class="section-rule">
+
+  <!-- Overall Verdict -->
+  <h2>Overall Verdict</h2>
+  <div class="verdict-pass" style="font-size:11.5pt; padding:6px 18px;">&#10003;&nbsp; PASS</div>
+  <p style="margin-top:10px;">All three cases met their preregistered criteria. No deviations from the preregistered procedure, criteria, or thresholds.</p>
+
+  <hr class="section-rule">
+
+  <!-- What This Establishes -->
+  <h2>What This Establishes (and Does Not)</h2>
+
+  <p><strong>Established within the tested construction:</strong></p>
+  <ul>
+    <li>A ProofRecord nonce derived from QPU output (raw counts + job ID + calibration snapshot) can be recomputed and verified end-to-end against the provider&#8217;s job record.</li>
+    <li>Substitution of any single input field (counts, job ID, calibration) is detected as forgery under this construction.</li>
+    <li>The ARK-457 replay-protection logic correctly denies a ProofRecord presented in a different authorization context.</li>
+  </ul>
+
+  <p><strong>Not established:</strong></p>
+  <ul>
+    <li>Quantum randomness superiority over CSPRNG (no Bell test; device bias present).</li>
+    <li>Universal security. Results are specific to this circuit, backend (ibm_fez), 8 qubits, 4,000 shots, calibration snapshot at execution time, and software harness.</li>
+    <li>Production certification or cryptographic security guarantee.</li>
+  </ul>
+
+  <hr class="section-rule">
+
+  <!-- Raw Artifact Hashes -->
+  <h2>Raw Artifact Hashes</h2>
+
+  <table>
+    <thead><tr><th>Artifact</th><th>SHA-256</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>results/raw/raw_counts.json</td>
+        <td style="font-family:'Courier New',monospace;font-size:8pt;word-break:break-all;font-weight:400;">09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71</td>
+      </tr>
+      <tr>
+        <td>results/raw/calibration.json</td>
+        <td style="font-family:'Courier New',monospace;font-size:8pt;word-break:break-all;font-weight:400;">b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e</td>
+      </tr>
+      <tr>
+        <td>results/proofrecord.json</td>
+        <td style="font-family:'Courier New',monospace;font-size:8pt;word-break:break-all;font-weight:400;">see nonce field above</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="section-rule">
+
+  <!-- Related Works -->
+  <h2>Related Works</h2>
+  <ul>
+    <li>ARK Corpus (ExecutionProof series): <a href="https://doi.org/10.5281/zenodo.21398675">https://doi.org/10.5281/zenodo.21398675</a> (19 records / 17 IDs / 16 PASS / 2 FAIL / 1 gate-stop)</li>
+    <li>ARK-457 (replay logic used in W1-C3): <a href="https://doi.org/10.5281/zenodo.21421742">https://doi.org/10.5281/zenodo.21421742</a></li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <p><em>Remnant Fieldworks RF Process. Preregistration-first. Results published as-is.</em></p>
+    <p><strong>Zenodo published record:</strong> <a href="https://zenodo.org/records/21424324">https://zenodo.org/records/21424324</a></p>
+    <p><strong>DOI (version):</strong> <a href="https://doi.org/10.5281/zenodo.21424324">https://doi.org/10.5281/zenodo.21424324</a>
+       &nbsp;&bull;&nbsp;
+       <strong>DOI (concept):</strong> <a href="https://doi.org/10.5281/zenodo.21424323">https://doi.org/10.5281/zenodo.21424323</a>
+    </p>
+  </div>
+
+</div><!-- end .content -->
+
+</body>
+</html>
