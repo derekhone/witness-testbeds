@@ -83,8 +83,10 @@ from `executionproof-testbeds` and `uip-phase1-testbeds`.
 
 ## Zenodo DOI
 
-Draft deposit staged: https://zenodo.org/uploads/21424324
-*(Derek publishes manually — do not publish automatically.)*
+**Published:** https://zenodo.org/records/21424324  
+**DOI (version):** https://doi.org/10.5281/zenodo.21424324  
+**DOI (concept):** https://doi.org/10.5281/zenodo.21424323
+
 
 ---
 

@@ -164,4 +164,6 @@ procedure, criteria, or thresholds.
 ---
 
 *Remnant Fieldworks RF Process. Preregistration-first. Results published as-is.*
-*Zenodo draft deposit: https://zenodo.org/uploads/21424324 — Derek publishes manually.*
+**Zenodo published record:** https://zenodo.org/records/21424324  
+**DOI (version):** https://doi.org/10.5281/zenodo.21424324  
+**DOI (concept):** https://doi.org/10.5281/zenodo.21424323
