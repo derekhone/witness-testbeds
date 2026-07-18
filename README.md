@@ -6,7 +6,7 @@
 | Record | Title | Status | DOI |
 |--------|-------|--------|-----|
 | WITNESS-1 | Quantum-Sourced Nonces with Verifiable Provenance | Published | [10.5281/zenodo.21424324](https://doi.org/10.5281/zenodo.21424324) |
-| WITNESS-2 | Length-Prefixed Quantum Nonce with Record-Hash Field Integrity | Preregistered / Awaiting execution | — |
+| WITNESS-2 | Length-Prefixed Quantum Nonce with Record-Hash Field Integrity | Published | [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381) |
 
 **WITNESS series concept DOI:** [10.5281/zenodo.21424323](https://doi.org/10.5281/zenodo.21424323)
 
@@ -112,7 +112,10 @@ from `executionproof-testbeds` and `uip-phase1-testbeds`.
 # WITNESS-2: Length-Prefixed Quantum Nonce with Record-Hash Field Integrity
 
 **Series:** WITNESS (second record)
-**Status:** Preregistered — awaiting execution (lock committed)
+**Status:** Published — 2026-07-18
+**DOI (version):** https://doi.org/10.5281/zenodo.21425381
+**DOI (concept):** https://doi.org/10.5281/zenodo.21424323
+**Record:** https://zenodo.org/records/21425381
 
 ---
 
@@ -171,14 +174,32 @@ witness-testbeds/
 
 ---
 
+## Execution Summary
+
+**QPU Job:** `d9di7nkinv1c73ap4ed0` | Backend: `ibm_fez` | Shots: 4000 | Unique outcomes: 256 / 256
+
+| Case | Description | Verdict |
+|------|-------------|---------|
+| W2-C1 | Honest end-to-end verification (provider-record provenance, 9 checks) | ✅ PASS |
+| W2-C2 | Tamper detection — 4 sub-trials (counts, job_id, calibration, context_id) | ✅ PASS |
+| W2-C3(a) | Cross-context replay — record_hash catches naive alteration | ✅ PASS |
+| W2-C3(b) | Cross-context replay — attacker recomputes record_hash; ARK-457 fires | ✅ PASS |
+
+**Harness fixes (pre-execution, disclosed):**
+- FIX-1 (8ae73bf): `service.least_busy()` TypeError in qiskit-ibm-runtime 0.48.0 → replaced with `min(eligible, key=lambda b: b.status().pending_jobs)`
+- FIX-2 (2b6cbc5): IBM API requires ISA-compliant circuits since March 2024 → added `transpile(qc, backend, optimization_level=1)`. Logical circuit unchanged.
+
+MANIFEST.sha256 recomputed and recommitted after each fix per RF protocol.
+
 ## RF Process
 
 1. **Preregistration** — `witness-2/prereg/WITNESS-2-prereg.md` written and committed.
 2. **Mock tests** — 48/48 PASS confirmed before MANIFEST lock.
-3. **MANIFEST lock** — `witness-2/MANIFEST.sha256` committed; PR opened for Derek's review.
-4. **Execution** — `submit_job.py` run after PR merge; three case scripts run in order.
-5. **Results** — `witness-2/results/WITNESS-2-report.md` written with verdicts as-is.
-6. **Zenodo** — Draft deposit staged; Derek publishes manually.
+3. **MANIFEST lock** — `witness-2/MANIFEST.sha256` committed; PR #3 opened and merged.
+4. **Harness fixes** — FIX-1 and FIX-2 disclosed and committed pre-execution.
+5. **Execution** — `submit_job.py` run; three case scripts run in order. All PASS.
+6. **Results** — `witness-2/results/WITNESS-2-report.md` written with verdicts as-is.
+7. **Zenodo** — Published: https://doi.org/10.5281/zenodo.21425381
 
 Post-lock code changes are prohibited. A harness defect blocking execution triggers
 gate-stop protocol; results published as-is regardless of outcome.
