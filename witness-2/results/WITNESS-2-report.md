@@ -5,7 +5,7 @@
 **Institution:** Remnant Fieldworks Inc.  
 **PI:** Derek Adam Hone  
 **Date of QPU Execution:** 2026-07-18  
-**Preregistration DOI:** (Zenodo deposit pending — see WITNESS-2 deposit)  
+**Preregistration DOI:** [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381)  
 **WITNESS Series Concept DOI:** 10.5281/zenodo.21424323  
 **WITNESS-1 Reference DOI:** 10.5281/zenodo.21424324  
 
@@ -200,7 +200,7 @@ All hashes computed deterministically from QPU output. No post-hoc modification.
 | Experiment | Status | DOI |
 |------------|--------|-----|
 | WITNESS-1 | ✅ Published | [10.5281/zenodo.21424324](https://doi.org/10.5281/zenodo.21424324) |
-| WITNESS-2 | ✅ Complete — Zenodo pending | (this deposit) |
+| WITNESS-2 | ✅ Published | [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381) |
 
 WITNESS series concept DOI: [10.5281/zenodo.21424323](https://doi.org/10.5281/zenodo.21424323)
 
