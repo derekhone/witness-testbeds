@@ -8,6 +8,7 @@
 | WITNESS-1 | Quantum-Sourced Nonces with Verifiable Provenance | Published | [10.5281/zenodo.21424324](https://doi.org/10.5281/zenodo.21424324) |
 | WITNESS-2 | Length-Prefixed Quantum Nonce with Record-Hash Field Integrity | Published | [10.5281/zenodo.21425381](https://doi.org/10.5281/zenodo.21425381) |
 | WITNESS-3 | Cosmic Beacon — CHSH Bell + NIST + LIGO/GWOSC Fused Nonce | Published | [10.5281/zenodo.21434832](https://doi.org/10.5281/zenodo.21434832) |
+| WITNESS-4 | The Freshness Bracket — Non-Backdatable, Reconstructable, Chain-Linked ProofRecord | **Executed (HELD)** | *(Held for review / IP-gate)* |
 
 **WITNESS series concept DOI:** [10.5281/zenodo.21424323](https://doi.org/10.5281/zenodo.21424323)
 
@@ -344,6 +345,67 @@ This experiment demonstrates that an authorization nonce can carry **publicly au
 **Execution commit:** `6fccdb6` (2026-07-18)  
 **Full report:** [witness-3/results/WITNESS-3-report.md](witness-3/results/WITNESS-3-report.md)  
 **Zenodo DOI:** [10.5281/zenodo.21434832](https://doi.org/10.5281/zenodo.21434832)
+
+---
+
+# WITNESS-4: The Freshness Bracket
+
+**Series:** WITNESS (fourth record — append-only ledger W1 → W2 → W3 → **W4**)  
+**Status:** Executed — ALL 5 CASES PASS (Zenodo publication HELD for review / IP-gate)
+
+---
+
+## Summary
+
+WITNESS-4 asks two foundational audit questions every ProofRecord must answer:
+1. **"Could this have been backdated or pre-computed?"** → No. Design hashed BEFORE anchors (*design-before-anchor*), and the fused nonce commits to a NIST pulse that didn't exist before its published time (*not-before* lower bound).
+2. **"Can I rebuild it myself from public data?"** → Yes. A dedicated reconstruction module rebuilt the entire record from public artifacts alone, confirmed by the IBM provider.
+
+WITNESS-4 also establishes an **append-only ledger** by chain-linking to WITNESS-3's published record_hash (Zenodo DOI 10.5281/zenodo.21434832), making WITNESS-1→2→3→**4** a single third-party-verifiable ledger. The same QPU run remained a CHSH Bell test, certified under the identical honest standard used in WITNESS-3.
+
+| Case | Description | Verdict |
+|------|-------------|---------|
+| W4-C1 | Zero-trust reconstruction from public artifacts + provider confirmation | **PASS** |
+| W4-C2 | Tamper detection (8 sub-trials) | **PASS** |
+| W4-C3 | Backdating / pre-computation detection (flagship freshness case) | **PASS** |
+| W4-C4 | Append-only ledger chain integrity | **PASS** |
+| W4-C5 | CHSH Bell-inequality violation certification (device-dependent) | **PASS** |
+
+---
+
+## Execution
+
+**Job ID:** `d9e0mjsjeosc73fi6b50` (IBM Quantum `ibm_fez`, us-east)  
+**CHSH S:** 2.595 ± 0.034 (17.5σ above classical) → `bell_certified = True`  
+**Freshness:** `fresh = True` (precommit 23:24:56Z < NIST pulse 23:27:00Z < finalize 23:30:09Z)  
+**record_hash:** `786ceb9a8bd46713de3b7da11cdb7f95518751381b885506d9c66d60c32e3dae`
+
+---
+
+## Harness Fixes
+
+**FIX-W4-1 (NIST polling for freshness):** The NIST `/pulse/last` endpoint has ~3–5 minute propagation delay. To ensure `design_before_anchor_ok = true`, the harness polls with exponential backoff until it fetches a pulse whose `timeStamp` is strictly AFTER the `precommit_time_utc`. This fix was discovered and applied during the first live run (the initial attempt fetched a stale pulse, violating the freshness bracket). The fix is a **harness correction to achieve the preregistered design**, not a post-lock design change.
+
+**Channel note (inherited from WITNESS-3):** `channel="ibm_cloud"` was used from the outset (the correct open-plan channel; this was discovered as FIX-W3-1 in WITNESS-3 and is inherited here, **not** a post-lock WITNESS-4 fix).
+
+---
+
+## Research Context
+
+WITNESS-4 extends WITNESS-1/2/3 by:
+- Adding a **freshness bracket** (design-before-anchor + not-before lower bound) to prove the record is non-backdatable and non-pre-computable
+- Providing **zero-trust reconstruction** from public artifacts (Prospect Question #5: "Can I rebuild it myself?")
+- Establishing an **append-only ledger** (W1→W2→W3→W4) via chain-linking to the previous record's published record_hash
+- Upgrading the fused nonce to **7 segments** (precommit_hash ‖ prev_record_hash ‖ raw_counts ‖ job_id ‖ calibration ‖ nist ‖ astro)
+
+This experiment demonstrates that a ProofRecord can carry **verifiable temporal ordering** and **independent reconstructability**, addressing the two most common audit objections to any evidentiary record.
+
+---
+
+**Preregistration commit:** `8e878b1` (2026-07-18)  
+**Execution commit:** `2e9a943` (2026-07-18)  
+**Full report:** [witness-4/results/WITNESS-4-report.md](witness-4/results/WITNESS-4-report.md)  
+**Zenodo DOI:** *(Held for review and file-first IP-gate decision)*
 
 ---
 
