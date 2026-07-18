@@ -1,0 +1,42 @@
+{
+  "case": "W1-C1",
+  "local_verification": {
+    "all_pass": true,
+    "cal_hash_match": true,
+    "counts_hash_match": true,
+    "detail": {
+      "recomputed_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+      "recomputed_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+      "recomputed_nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+      "stored_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+      "stored_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+      "stored_job_id": "d9dgp6kjeosc73fhigsg",
+      "stored_nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+      "supplied_job_id": "d9dgp6kjeosc73fhigsg"
+    },
+    "jobid_match": true,
+    "nonce_match": true
+  },
+  "proofrecord_job_id": "d9dgp6kjeosc73fhigsg",
+  "proofrecord_nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+  "provider_verification": {
+    "counts_match": true,
+    "job_found": true,
+    "provider_counts_sample": {
+      "01111101": 18,
+      "10001011": 16,
+      "10010001": 17,
+      "10010010": 17,
+      "10011001": 19
+    },
+    "stored_counts_sample": {
+      "00000000": 12,
+      "00000001": 19,
+      "00000010": 15,
+      "00000011": 12,
+      "00000100": 14
+    }
+  },
+  "timestamp_utc": "2026-07-18T05:19:06.857307+00:00",
+  "verdict": "PASS"
+}

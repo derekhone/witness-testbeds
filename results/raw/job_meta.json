@@ -1,0 +1,12 @@
+{
+  "backend": "ibm_fez",
+  "circuit_description": "8-qubit Hadamard on all qubits, measure all",
+  "execution_mode": "Batch (open plan; Session not available)",
+  "harness_fix_note": "Pre-execution fix: channel changed from ibm_quantum to ibm_quantum_platform; execution mode changed from Session to Batch (open plan restriction). Fix does not touch circuit, criteria, or procedure.",
+  "job_id": "d9dgp6kjeosc73fhigsg",
+  "n_qubits": 8,
+  "shots": 4000,
+  "timestamp_utc": "2026-07-18T05:17:54.918200+00:00",
+  "total_shots_received": 4000,
+  "unique_outcomes": 256
+}

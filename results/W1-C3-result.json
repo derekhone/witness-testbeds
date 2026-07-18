@@ -1,0 +1,27 @@
+{
+  "ark457_replay_reason": "Cross-context replay detected. Mismatched dimension(s): session: original='witness-1-primary' presented='witness-1-replay-context'",
+  "case": "W1-C3",
+  "mismatched_dims": [
+    "session"
+  ],
+  "original_context": {
+    "audience": "witness-1-verifier",
+    "environment": "experimental",
+    "resource": "witness-1-proofrecord",
+    "session": "witness-1-primary",
+    "tenant": "remnant-fieldworks"
+  },
+  "original_context_decision": "ALLOW",
+  "original_correct": true,
+  "replay_context": {
+    "audience": "witness-1-verifier",
+    "environment": "experimental",
+    "resource": "witness-1-proofrecord",
+    "session": "witness-1-replay-context",
+    "tenant": "remnant-fieldworks"
+  },
+  "replay_context_decision": "DENY",
+  "replay_denied": true,
+  "timestamp_utc": "2026-07-18T05:19:12.000797+00:00",
+  "verdict": "PASS"
+}

@@ -41,7 +41,7 @@ def provider_check(job_id: str, stored_counts: dict, token: str) -> dict:
     """
     try:
         from qiskit_ibm_runtime import QiskitRuntimeService
-        service = QiskitRuntimeService(channel="ibm_quantum", token=token)
+        service = QiskitRuntimeService(channel="ibm_quantum_platform", token=token)
         job = service.job(job_id)
         result = job.result()
         pub_result = result[0]

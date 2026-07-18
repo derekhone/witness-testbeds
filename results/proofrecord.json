@@ -1,0 +1,10 @@
+{
+  "backend": "ibm_fez",
+  "calibration_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+  "context_id": "witness-1-primary",
+  "job_id": "d9dgp6kjeosc73fhigsg",
+  "nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+  "raw_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+  "schema": "witness.proofrecord/v1",
+  "timestamp_utc": "2026-07-18T05:17:54.918200+00:00"
+}

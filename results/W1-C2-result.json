@@ -1,0 +1,74 @@
+{
+  "all_substitutions_detected": true,
+  "case": "W1-C2",
+  "sub_trials": [
+    {
+      "forgery_detected": true,
+      "sub_trial": "a: tampered_counts",
+      "sub_verdict": "PASS",
+      "verification_result": {
+        "all_pass": false,
+        "cal_hash_match": true,
+        "counts_hash_match": false,
+        "detail": {
+          "recomputed_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+          "recomputed_counts_hash": "9b7954e1a52165d5630c6fe1555601ecfced9fe9b89cf992891e52564c992db2",
+          "recomputed_nonce": "dd38409c26e4d49eca3f5af59a337cf4a6145ca6e0642a91452ef550ffbd1673",
+          "stored_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+          "stored_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+          "stored_job_id": "d9dgp6kjeosc73fhigsg",
+          "stored_nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+          "supplied_job_id": "d9dgp6kjeosc73fhigsg"
+        },
+        "jobid_match": true,
+        "nonce_match": false
+      }
+    },
+    {
+      "forgery_detected": true,
+      "sub_trial": "b: tampered_job_id",
+      "sub_verdict": "PASS",
+      "verification_result": {
+        "all_pass": false,
+        "cal_hash_match": true,
+        "counts_hash_match": true,
+        "detail": {
+          "recomputed_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+          "recomputed_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+          "recomputed_nonce": "f549415500691e3e4ba054860990c7687e4bd443a183d823960692ca4b048b1f",
+          "stored_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+          "stored_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+          "stored_job_id": "d9dgp6kjeosc73fhigsg",
+          "stored_nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+          "supplied_job_id": "d9dgp6kjeosc73fhigsg_TAMPERED"
+        },
+        "jobid_match": false,
+        "nonce_match": false
+      }
+    },
+    {
+      "forgery_detected": true,
+      "sub_trial": "c: tampered_calibration",
+      "sub_verdict": "PASS",
+      "verification_result": {
+        "all_pass": false,
+        "cal_hash_match": false,
+        "counts_hash_match": true,
+        "detail": {
+          "recomputed_cal_hash": "d512b19c43bfec0bd4294ce4922dd358ec901e5f6af9dae31cbf61c7260d200d",
+          "recomputed_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+          "recomputed_nonce": "8dbe3303a4324fdfc80755cde475ef593eb8bb47f5cc95cb870dd9946cdf65b4",
+          "stored_cal_hash": "b46857638b0c70526263589cf7d372a62c59ad9df8eac95c54cc68bf097bab0e",
+          "stored_counts_hash": "09ec92f3c38a0ec59f30d95cefc7409736d4ccf919686bbc4c7cfa4cad165e71",
+          "stored_job_id": "d9dgp6kjeosc73fhigsg",
+          "stored_nonce": "2a06cecc238ddcf1e8c2774df2074d9bd3d3fdbc7b1a3e6436281648aadad0ec",
+          "supplied_job_id": "d9dgp6kjeosc73fhigsg"
+        },
+        "jobid_match": true,
+        "nonce_match": false
+      }
+    }
+  ],
+  "timestamp_utc": "2026-07-18T05:19:09.400033+00:00",
+  "verdict": "PASS"
+}
