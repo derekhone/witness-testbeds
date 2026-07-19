@@ -1,7 +1,7 @@
 # WITNESS Series — Quantum-Sourced Authorization Nonces with Verifiable Provenance
 
 **Author:** Derek Adam Hone / Remnant Fieldworks Inc.
-**Repository:** `witness-testbeds` — independent of `executionproof-testbeds` and `uip-phase1-testbeds`
+**Repository:** `witness-testbeds` — independent of `executionproof-testbeds` and `cif-phase1-testbeds` (formerly `uip-phase1-testbeds`)
 
 | Record | Title | Status | DOI |
 |--------|-------|--------|-----|
@@ -92,7 +92,7 @@ gate-stop protocol; results published as-is regardless of outcome.
   https://doi.org/10.5281/zenodo.21421742
 
 **WITNESS-1 is an independent series.** `witness-testbeds` is a separate repository
-from `executionproof-testbeds` and `uip-phase1-testbeds`.
+from `executionproof-testbeds` and `cif-phase1-testbeds` (formerly `uip-phase1-testbeds`).
 
 ---
 
