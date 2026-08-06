@@ -1,3 +1,9 @@
+> **Repository Role:** Preregistered Experiment Series — Quantum Authorization Nonce (WITNESS) · Part of the [Remnant Fieldworks](https://remnantfieldworks.com) research and product ecosystem
+
+**Where this fits:** This repository is part of the Remnant Fieldworks quantum witness research program — a high-adversity test environment for provenance and execution integrity that informs the [ExecutionProof](https://executionproof.io) governance architecture. The quantum series tests whether nonclassical entropy sources, Bell-inequality violations, and tamper-evident records can serve as authorization evidence components in ProofRecords. WITNESS tests quantum-sourced authorization nonces with verifiable provenance.
+
+---
+
 # WITNESS Series — Quantum-Sourced Authorization Nonces with Verifiable Provenance
 
 **Author:** Derek Adam Hone / Remnant Fieldworks Inc.
